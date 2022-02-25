@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
+import Header from './Header';
 
 class Login extends Component {
     state = {  } 
     render() { 
         return (
-            <p>Login</p>
+            <>
+                <Header />
+                <p>Login</p>
+            </>
         );
     }
 }

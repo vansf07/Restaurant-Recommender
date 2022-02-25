@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
+import Header from './Header';
 
 class Profile extends Component {
     state = {  } 
     render() { 
         return (
-            <p>Profile</p>
+            <>
+                <Header />
+                <p>Profile</p>
+            </>
         );
     }
 }
