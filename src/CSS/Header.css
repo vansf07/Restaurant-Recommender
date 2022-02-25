@@ -1,0 +1,26 @@
+:root {
+    --clr1: #e4dfda;
+    --clr2: #d4b483;
+    --clr3: #d08b8f;
+    --clr4: #6ac8af;
+    --clr5: #a96feb;
+}
+
+.header {
+    background-color: var(--clr2);
+    font-size: 1.5rem;
+}
+
+.navbar {
+    width: fit-content;
+    margin-right: 0;
+}   
+
+.link {
+    text-decoration: none;
+    color: black;
+}
+
+.link:hover {
+    color: var(--clr1);
+}

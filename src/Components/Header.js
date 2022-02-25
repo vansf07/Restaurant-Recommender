@@ -1,17 +1,19 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
+import '../CSS/Header.css';
+
 class Header extends Component {
     state = {  } 
     render() { 
         return (
-            <div>
-                <nav>
-                    <ul>
-                        <li><Link to="/">Home</Link></li>
-                        <li><Link to="/login">Login</Link></li>
-                        <li><Link to="/profile">Profile</Link></li>
-                    </ul>
+            <div className="header">
+                <nav className="navbar container">
+                    <div className="row row-cols-1 row-cols-sm-3 justify-content-end">
+                        <div className="col"><Link className="link" to="/">Home</Link></div>
+                        <div className="col"><Link className="link" to="/login">Login</Link></div>
+                        <div className="col"><Link className="link" to="/profile">Profile</Link></div>
+                    </div>
                 </nav>
             </div>
         );
