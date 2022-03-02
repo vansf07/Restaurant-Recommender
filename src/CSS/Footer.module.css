@@ -1,0 +1,38 @@
+.footer {
+    background-color: black;
+    height: 15vh;
+    padding: 1.5%;
+}
+
+.backToTop {
+    text-align: center;
+    width: fit-content;
+    margin: auto;
+}
+
+.container {
+    margin: auto;
+}
+
+.row {
+    margin: 0%;
+    width: 100%;
+}
+
+.col {
+    color: var(--clr2);
+    text-align: center;
+}
+
+.link {
+    text-decoration: none;
+}
+
+.linkText {
+    transition: transform 0.2s;
+}
+
+.linkText:hover {
+    transform: scale(1.1);
+    color: var(--clr1);
+}

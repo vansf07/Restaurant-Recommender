@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-import '../CSS/Header.css';
+import styles from '../CSS/Header.module.css';
 
 class Header extends Component {
     state = {  }
@@ -14,17 +14,17 @@ class Header extends Component {
     render() { 
         return (
             <>
-            <div id="show-menu" onClick={this.showMenu}>
-                <div className="hmbg"></div>
-                <div className="hmbg"></div>
-                <div className="hmbg"></div>
+            <div id="show-menu" className={styles.showMenu} onClick={this.showMenu}>
+                <div className={styles.hmbg}></div>
+                <div className={styles.hmbg}></div>
+                <div className={styles.hmbg}></div>
             </div>
-            <div id="collapsible-menu" className="header">
-                <nav className="navbar container">
+            <div id="collapsible-menu" className={`header ${styles.header} ${styles.collapsibleMenu}`}>
+                <nav className={`navbar container ${styles.navbar}`}>
                     <div className="row justify-content-end">
-                        <div className="col"><Link className="link" to="/">Home</Link></div>
-                        <div className="col"><Link className="link" to="/login">Login</Link></div>
-                        <div className="col"><Link className="link" to="/profile">Profile</Link></div>
+                        <div className={`col ${styles.col}`}><Link className={`link ${styles.link}`} to="/">Home</Link></div>
+                        <div className={`col ${styles.col}`}><Link className={`link ${styles.link}`} to="/login">Login</Link></div>
+                        <div className={`col ${styles.col}`}><Link className={`link ${styles.link}`} to="/profile">Profile</Link></div>
                     </div>
                 </nav>
             </div>

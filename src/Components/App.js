@@ -1,18 +1,105 @@
 import React, { Component } from 'react';
 
-import '../CSS/App.css';
+import styles from '../CSS/App.module.css';
 
+import Footer from './Footer';
 import Header from './Header';
 
+const observerLeft = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add(styles.featureAnimationLeft);
+        }
+    });
+});
+
+const observerRight = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add(styles.featureAnimationRight);
+        }
+    });
+});
+
+function getLanding(props) {
+    return (
+        <section id="landing">
+            <div className={styles.landingImage}>
+                <div className={styles.landingImageMask}></div>
+                <div className={styles.landingTextWrapper}>
+                    <p className={styles.landingText}>Let <em>us</em> decide your dinner tonight.</p>
+                    <a href="#features">
+                        <div className={styles.arrow}>
+                            <span className={styles.arrowSpan}></span>
+                            <span className={styles.arrowSpan}></span>
+                            <span className={styles.arrowSpan}></span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+    );
+}
+
+function getFeatureTable(props) {
+    return (
+        <section id="features">
+            <p className={styles.featuresHeading}>What do we offer?</p>
+            <div className={`container ${styles.featuresTable}`}>
+                <div className={`row row-cols-1 row-cols-md-2 justify-content-evenly ${styles.row}`}>
+                    <div className={`col featureLeft ${styles.col} ${styles.feature}`}>Recommendations</div>
+                    <div className={`col featureRight ${styles.col} ${styles.featureDetail}`}>Let us suggest what you should try next</div>
+                </div>
+                <div className={`row row-cols-1 row-cols-md-2 justify-content-evenly ${styles.row}`}>
+                    <div className={`col featureRight ${styles.smallVisible} ${styles.col} ${styles.feature}`}>Reviews and Ratings</div>
+                    <div className={`col featureLeft ${styles.col} ${styles.featureDetail}`}>
+                        Know your restaurant before you go.
+                        Had a good experience? Let others know
+                    </div>
+                    <div className={`col featureRight ${styles.bigVisible} ${styles.col} ${styles.feature}`}>Reviews and Ratings</div>
+                </div>
+                <div className={`row row-cols-1 row-cols-md-2 justify-content-evenly ${styles.row}`}>
+                    <div className={`col featureLeft ${styles.col} ${styles.feature}`}>Contact</div>
+                    <div className={`col featureRight ${styles.col} ${styles.featureDetail}`}>Have any queries? Ring the restaurant. We make it easy to make a reservation.</div>
+                </div>
+                <div className={`row row-cols-1 row-cols-md-2 justify-content-evenly ${styles.row}`}>
+                    <div className={`col featureRight ${styles.smallVisible} ${styles.col} ${styles.feature}`}>Locate</div>
+                    <div className={`col featureLeft ${styles.col} ${styles.featureDetail}`}>Curated locations to ensure that the map points you right to the door of the restaurant.</div>
+                    <div className={`col featureRight ${styles.bigVisible} ${styles.col} ${styles.feature}`}>Locate</div>
+                </div>
+            </div>
+        </section>
+    );
+}
+
+function getStartedButton() {
+    return (
+        <section id="get-started" className={styles.getStartedSection}>
+            <div className={styles.getStartedP}><p>Ready to try?</p></div>
+            <div className={styles.getStartedButton}><button type='button'>Get Started</button></div>
+        </section>
+    );
+}
+
 class App extends Component {
-    state = {  } 
     render() { 
         return (
-            <>
+            <div className={styles.body}>
                 <Header />
-                <p>Home Page</p>
-            </>
+                { getLanding(this.props) }
+                { getFeatureTable(this.props) }
+                { getStartedButton() }
+                <Footer />
+            </div>
         );
+    }
+
+    componentDidMount() {
+        for(const x of document.getElementsByClassName("featureLeft"))
+            observerLeft.observe(x)
+        
+        for(const x of document.getElementsByClassName("featureRight"))
+            observerRight.observe(x)
     }
 }
  

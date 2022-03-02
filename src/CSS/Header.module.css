@@ -1,14 +1,7 @@
-:root {
-    --clr1: #e4dfda;
-    --clr2: #d4b483;
-    --clr3: #d08b8f;
-    --clr4: #6ac8af;
-    --clr5: #a96feb;
-}
-
 .header {
     background-color: var(--clr2);
     font-size: 1.4rem;
+    height: 50px;
 }
 
 .navbar {
@@ -33,25 +26,26 @@
 }
 
 .hmbg {
-    background-color: gray;
+    background-color: lightgray;
     width: 20px;
     height: 2px;
     margin: 5px;
 }
 
-#show-menu {
+.showMenu {
     display: none;
 }
 
 @media screen and (max-width: 576px) {
-    #collapsible-menu {
+    .collapsibleMenu {
         display: none;
     }
 
-    #show-menu {
+    .showMenu {
         position: fixed;
         right: 10px;
         top: 10px;
         display: block;
+        z-index: 1;
     }
 }
