@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 import styles from '../CSS/App.module.css';
 
@@ -8,7 +9,8 @@ import Header from './Header';
 const observerLeft = new IntersectionObserver(entries => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
-            entry.target.classList.add(styles.featureAnimationLeft);
+            // sentry.target.classList.add(styles.featureAnimationLeft);
+            entry.target.classList.add(styles.featureAnimationFadeIn);
         }
     });
 });
@@ -16,7 +18,8 @@ const observerLeft = new IntersectionObserver(entries => {
 const observerRight = new IntersectionObserver(entries => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
-            entry.target.classList.add(styles.featureAnimationRight);
+            // entry.target.classList.add(styles.featureAnimationRight);
+            entry.target.classList.add(styles.featureAnimationFadeIn);
         }
     });
 });
@@ -28,7 +31,7 @@ function getLanding(props) {
                 <div className={styles.landingImageMask}></div>
                 <div className={styles.landingTextWrapper}>
                     <p className={styles.landingText}>Let <em>us</em> decide your dinner tonight.</p>
-                    <a href="#features">
+                    <a href="#get-started">
                         <div className={styles.arrow}>
                             <span className={styles.arrowSpan}></span>
                             <span className={styles.arrowSpan}></span>
@@ -75,8 +78,17 @@ function getFeatureTable(props) {
 function getStartedButton() {
     return (
         <section id="get-started" className={styles.getStartedSection}>
-            <div className={styles.getStartedP}><p>Ready to try?</p></div>
-            <div className={styles.getStartedButton}><button type='button'>Get Started</button></div>
+            <div className={styles.getStartedP}>
+                <p>Ready to try?</p>
+            </div>
+            <div className={styles.getStartedButton}>
+                <Link to="/login">
+                    <button type='button'>Get Started</button>
+                </Link>
+            </div>
+            <div className={styles.getStartedP} style={{fontSize: '1.4rem', marginTop: '35px'}}>
+                <p>Learn more below</p>
+            </div>
         </section>
     );
 }
@@ -87,8 +99,8 @@ class App extends Component {
             <div className={styles.body}>
                 <Header />
                 { getLanding(this.props) }
-                { getFeatureTable(this.props) }
                 { getStartedButton() }
+                { getFeatureTable(this.props) }
                 <Footer />
             </div>
         );

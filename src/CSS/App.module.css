@@ -50,11 +50,7 @@
 
 @media screen and (min-width: 700px) {
     .landingText {
-        max-width: 1000px;
-        font-family: 'Playfair Display', serif;
-        text-align: center;
         font-size: 7rem;
-        color: white;
     }
 }
 
@@ -105,13 +101,17 @@
     width: 100%;
     max-width: 1000px;
     height: fit-content;
+    background-color: #d9dfa6;
+    border: 1px solid black;
+    border-radius: 10px;
+    box-shadow: 4px 4px rgb(59, 59, 59);
 }
 
 .row {
     width: 100%;
     margin: 70px 0;
     align-items: center;
-    padding: 50px;
+    padding: 50px 0 50px 0;
 }
 
 .col {
@@ -149,12 +149,28 @@
     }
 }
 
+@keyframes fadeIn {
+    0% {
+        opacity: 0.3;
+        transform: scale(60%);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(100%);
+    }
+}
+
 .featureAnimationLeft {
     animation: slideFromLeft 1.5s forwards;
 }
 
 .featureAnimationRight {
     animation: slideFromRight 1.5s forwards;
+}
+
+.featureAnimationFadeIn {
+    animation: fadeIn 1s forwards;
 }
 
 .smallVisible {
@@ -177,14 +193,18 @@
 
 .getStartedSection {
     width: 100%;
-    background-color: var(--clr5);
-    margin: 50px auto;
+    background-color: #9a59e6;
+    margin-top: 50px;
+    padding: 100px;
 }
 
 .getStartedP {
     width: fit-content;
     margin: auto;
     font-size: 3rem;
+    font-family: 'Playfair Display', serif;
+    color: white;
+    text-align: center;
 }
 
 .getStartedButton {
@@ -195,6 +215,13 @@
     padding: 30px;
 }
 
-.getStartedButton > button {
-    background-color: var(--clr4);
+.getStartedButton button {
+    background-color: #5fdab9;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1.5rem;
 }
