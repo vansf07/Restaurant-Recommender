@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville&display=swap');
 .header {
     background-color: var(--clr2);
     font-size: 1.4rem;
@@ -13,7 +14,7 @@
     text-decoration: none;
     color: black;
     margin: 5px;
-    
+    font-family: 'Libre Baskerville', serif;
 }
 
 .col {

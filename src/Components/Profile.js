@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
-import Header from './Header';
+import styles from '../CSS/Profile.module.css';
 
+import Footer from './Footer';
+import Header from './Header';
 class Profile extends Component {
     state = {  } 
     render() { 
         return (
-            <>
+            <div className={styles.body}>
                 <Header />
-                <p>Profile</p>
-            </>
+                <h1>Profile</h1>
+                <Footer />
+            </div>
         );
     }
 }
