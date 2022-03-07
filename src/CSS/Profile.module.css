@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Preahvihear&display=swap');
 body {
     background-color: #e4dfda;
 }
@@ -7,4 +8,19 @@ h1 {
     font-family: 'Playfair Display', serif;
     text-align: center;
     margin-top: 5%;
+    margin-bottom: 3%;
+}
+
+img {
+    width: 20%;
+    height:auto;
+    text-align: center;
+    margin: 0 auto;
+    display: flex;
+}
+
+h2 {
+    font-family: 'Preahvihear', sans-serif;
+    text-align: center;
+    margin: 3%;
 }
