@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-
+import logo from '../assets/RestaurantLogo.png';
 import styles from '../CSS/Header.module.css';
 
 class Header extends Component {
@@ -13,6 +13,7 @@ class Header extends Component {
 
     render() { 
         return (
+            // <img src={logo}></img>
             <>
             <div id="show-menu" className={styles.showMenu} onClick={this.showMenu}>
                 <div className={styles.hmbg}></div>
@@ -21,6 +22,7 @@ class Header extends Component {
             </div>
             <div id="collapsible-menu" className={`header ${styles.header} ${styles.collapsibleMenu}`}>
                 <nav className={`navbar container ${styles.navbar}`}>
+                
                     <div className="row justify-content-end">
                         <div className={`col ${styles.col}`}><Link className={`link ${styles.link}`} to="/">Home</Link></div>
                         <div className={`col ${styles.col}`}><Link className={`link ${styles.link}`} to="/login">Login</Link></div>

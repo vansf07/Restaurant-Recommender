@@ -10,6 +10,14 @@
     margin-right: 0;
 }
 
+/* img {
+    width: fit-content;
+    height:auto;
+    text-align: left;
+    margin-left: 0;
+    display: inline-flex;
+} */
+
 .link {
     text-decoration: none;
     color: black;

@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Preahvihear&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Domine&display=swap');
 body {
     background-color: #e4dfda;
 }
@@ -23,4 +24,15 @@ h2 {
     font-family: 'Preahvihear', sans-serif;
     text-align: center;
     margin: 3%;
+}
+
+.content {
+    font-family: 'Domine', serif;
+    margin-left: 10%;
+    text-align: left;
+    font-size: large;
+}
+
+span {
+    font-weight: bold;
 }

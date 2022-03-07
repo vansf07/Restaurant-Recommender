@@ -12,6 +12,14 @@ class Profile extends Component {
                 <h1>Profile</h1>
                 <img src={profilepic}></img>
                 <h2>Rani Kumar</h2>
+                <p className={styles.content}>
+                    <span>Age:</span> 20 <br/>
+                    <span>Address: </span><br />
+                    H NO. 9-10-8 <br /> Shivaji Chaurastha <br /> Sundar Nagar, Bandra West <br /> Mumbai - 400050 <br /> Maharshtra <br /> India <br />
+                    <span>Mobile Number:</span> +91987456231 <br/>
+                    <span>Food Preference:</span> Indian, Chinese <br/>
+                    <span> Dietary Preferences:</span> Vegetarian, No Egg
+                </p>
                 <Footer />
             </div>
         );
