@@ -82,7 +82,7 @@ function getStartedButton() {
                 <p>Ready to try?</p>
             </div>
             <div className={styles.getStartedButton}>
-                <Link to="/login">
+                <Link to="/signin">
                     <button type='button'>Get Started</button>
                 </Link>
             </div>

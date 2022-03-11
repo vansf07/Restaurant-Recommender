@@ -23,7 +23,8 @@ class Header extends Component {
                 <nav className={`navbar container ${styles.navbar}`}>
                     <div className="row justify-content-end">
                         <div className={`col ${styles.col}`}><Link className={`link ${styles.link}`} to="/">Home</Link></div>
-                        <div className={`col ${styles.col}`}><Link className={`link ${styles.link}`} to="/login">Login</Link></div>
+                        <div className={`col ${styles.col}`}><Link className={`link ${styles.link}`} to="/signin">LogIn</Link></div>
+                        <div className={`col ${styles.col}`}><Link className={`link ${styles.link}`} to="/signup">SignUp</Link></div>
                         <div className={`col ${styles.col}`}><Link className={`link ${styles.link}`} to="/profile">Profile</Link></div>
                     </div>
                 </nav>

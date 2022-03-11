@@ -1,11 +1,12 @@
 .header {
     background-color: var(--clr2);
     font-size: 1.4rem;
-    height: 50px;
+    height: 60px;
+    align-content: center;
 }
 
 .navbar {
-    width: fit-content;
+    width: max-content;
     margin-right: 0;
 }
 

@@ -1,0 +1,75 @@
+* {
+    box-sizing: border-box;
+  }
+  
+  body {
+    min-height: 100vh;
+    display: flex;
+    font-weight: 400;
+    font-family: sans-serif;
+    background: #6ac8af;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #a96feb, #e4dfda, #6ac8af);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #a96feb, #e4dfda, #6ac8af); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    margin-top: 10px;
+  
+  }
+  
+  body, html, .App, #root, .outer {
+    width: 100%;
+    height: 100%;
+    margin-top: 10px;
+  
+  }
+  
+  .navbar-light {
+    background-color: #e4dfda;
+    box-shadow: 0px 14px 80px rgba(34, 35, 58, 0.2);
+  }
+  
+  .outer {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: left;
+  }
+  
+  .inner {
+    width: 450px;
+    margin: auto;
+    background: #e4dfda;
+    box-shadow: 0px 14px 80px rgba(34, 35, 58, 0.2);
+    padding: 40px 55px 45px 55px;
+    border-radius: 15px;
+    transition: all .3s;
+  }
+  
+  .outer .form-control:focus {
+    border-color: #d08b8f;
+    box-shadow: none;
+  }
+  
+  .outer h3 {
+    text-align: center;
+    margin: 0;
+    line-height: 2;
+    padding-bottom: 20px;
+  }
+  
+  .custom-control-label {
+    font-weight: 400;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .forgot-password,
+  .forgot-password a {
+    text-align: right;
+    font-size: 13px;
+    padding-top: 10px;
+    color: #a96feb;
+    margin: 0;
+  }
+  
+  .forgot-password a {
+    color: #a96feb;
+  }
