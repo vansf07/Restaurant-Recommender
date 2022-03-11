@@ -3,6 +3,8 @@
     background-color: var(--clr2);
     font-size: 1.4rem;
     height: 50px;
+    position: relative;
+    margin-top: 0;
 }
 
 .navbar {
