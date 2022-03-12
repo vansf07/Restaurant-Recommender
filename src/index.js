@@ -7,6 +7,7 @@ import App from './Components/App';
 import Login from './Components/Login';
 import SignUp from './Components/Signup';
 import Profile from './Components/Profile';
+import Restaurant from './Components/Restaurant';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -16,6 +17,7 @@ ReactDOM.render(
             <Route path="/profile" element={<Profile />} />
             <Route path="/signin" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />
+            <Route path="/restaurant/:id" element={<Restaurant />}/>
       </Routes>
       </BrowserRouter>
   </React.StrictMode>,
