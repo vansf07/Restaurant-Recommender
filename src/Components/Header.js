@@ -13,7 +13,6 @@ class Header extends Component {
 
     render() { 
         return (
-            // <img src={logo}></img>
             <>
             <div id="show-menu" className={styles.showMenu} onClick={this.showMenu}>
                 <div className={styles.hmbg}></div>
@@ -21,8 +20,8 @@ class Header extends Component {
                 <div className={styles.hmbg}></div>
             </div>
             <div id="collapsible-menu" className={`header ${styles.header} ${styles.collapsibleMenu}`}>
+                <Link to="/"><img src={logo} alt="Our Logo" className={`${styles.headerLogo}`}></img></Link>
                 <nav className={`navbar container ${styles.navbar}`}>
-                
                     <div className="row justify-content-end">
                         <div className={`col ${styles.col}`}><Link className={`link ${styles.link}`} to="/">Home</Link></div>
                         <div className={`col ${styles.col}`}><Link className={`link ${styles.link}`} to="/signin">LogIn</Link></div>
