@@ -1,10 +1,47 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Preahvihear&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Domine&display=swap');
-body {
-    background-color: #e4dfda;
+@import url('https://images.unsplash.com/photo-1511688878353-3a2f5be94cd7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80');
+.main {
+    background-color: rgb(169, 111, 235, 0.7);
+    background-attachment: fixed; 
+    background-size: cover;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    position: relative;
 }
-
+.container {
+    width: 30rem;
+    height: 4rem;
+    box-shadow: 0 0 1rem 0 rgba(0, 0, 0, .2);
+    border-radius: 5px;
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    align-items: center;
+    background: inherit;
+    overflow: hidden;
+    margin: 0 auto;
+    margin-top: 2%;
+    }
+.container:before {
+    content: "";
+    position: absolute;
+    background: inherit;
+    z-index: -1;
+    text-align: center;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    box-shadow: inset 0 0 2000px rgba(255, 255, 255, .4);
+    filter: blur(10px);
+}
+.container {
+    background: inherit;
+}
 h1 {
     font-family: 'Playfair Display', serif;
     text-align: center;
@@ -12,7 +49,15 @@ h1 {
     margin-bottom: 3%;
 }
 
+.profilebg {
+    background-image: url('https://images.unsplash.com/photo-1511688878353-3a2f5be94cd7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80');
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: relative;
+}
+
 img {
+    padding-top: 5%;
     width: 20%;
     height:auto;
     text-align: center;
