@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { useParams } from 'react-router-dom';
 
 import Footer from './Footer';
 import Header from './Header';
@@ -31,9 +32,9 @@ function ratingStarsSmall(rating) {
     return stars;
 }
 
-function reviewBlock(reviews) {
+function reviewBlock(reviews, element_key) {
     return (
-        <div>
+        <div key={element_key}>
             <p>{reviews[0]} <span>{ ratingStarsSmall(reviews[1]) }</span></p>
             <p>{reviews[2]}</p>
         </div>
@@ -43,7 +44,7 @@ function reviewBlock(reviews) {
 function reviewBlocks(xs) {
     let arr = [];
     for(let x of xs) {
-        arr.push(reviewBlock(x));
+        arr.push(reviewBlock(x, `reviewblock_${x[0]}`));
     }
     return arr;
 }
@@ -56,56 +57,52 @@ function images(links) {
     );
 }
 
-class Restaurant extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {};
-        console.log(this.props);
-    }
 
-    restaurantInfo = (props) => {
-        return (
+function restaurantInfo(props) {
+    // console.log(props);
+    return (
+        <div>
+            <div>
+                <h3>Shanti Sagar</h3>
+                <p>South Indian, Chinese</p>
+                <p>Pure veg</p>
+            </div>
             <div>
                 <div>
-                    <h3>Shanti Sagar</h3>
-                    <p>South Indian, Chinese</p>
-                    <p>Pure veg</p>
+                    Rating
+                    <span>{ ratingStars(4) }</span>
                 </div>
                 <div>
+                    <p>Reviews</p>
                     <div>
-                        Rating
-                        <span>{ ratingStars(4) }</span>
-                    </div>
-                    <div>
-                        <p>Reviews</p>
-                        <div>
-                            {
-                                reviewBlocks([
-                                    ["User 1", 3, "Ok"],
-                                    ["User 2", 5, "Very nice food"]
-                                ])
-                            }
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <div>
-                        { images(["/api/images/res1_1.png", "/api/images/res1_2.png"]) }
+                        {
+                            reviewBlocks([
+                                ["User 1", 3, "Ok"],
+                                ["User 2", 5, "Very nice food"]
+                            ])
+                        }
                     </div>
                 </div>
             </div>
-        );
-    }
-
-    render() { 
-        return (
-            <>
-            <Header />
-            { this.restaurantInfo(this.state) }
-            <Footer />
-            </>
-        );
-    }
+            <div>
+                <div>
+                    { images(["/api/images/res1_1.png", "/api/images/res1_2.png"]) }
+                </div>
+            </div>
+        </div>
+    );
 }
  
-export default Restaurant;
+export default function Restaurant(props) {
+
+    let { id } = useParams();
+    console.log(id);
+
+    return (
+        <>
+        <Header />
+        { restaurantInfo(props) }
+        <Footer />
+        </>
+    );
+};
