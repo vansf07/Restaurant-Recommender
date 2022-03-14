@@ -44,14 +44,8 @@
     max-width: 1000px;
     font-family: 'Playfair Display', serif;
     text-align: center;
-    font-size: 10vw;
+    font-size: min(7rem, 10vw);
     color: white;
-}
-
-@media screen and (min-width: 700px) {
-    .landingText {
-        font-size: 7rem;
-    }
 }
 
 .arrow{
@@ -59,6 +53,12 @@
     bottom: 5%;
     left: 50%;
     transform: translate(-50%,-50%);
+}
+
+@media screen and (max-width: 300px) {
+    .arrow {
+        transform: scale(0.5);
+    }
 }
 
 .arrowSpan{
@@ -92,7 +92,7 @@
 }
 
 .featuresHeading {
-    font-size: 2rem;
+    font-size: min(2rem, 5vw);
     width: fit-content;
     margin: 50px auto;
 }
@@ -105,11 +105,12 @@
     border: 1px solid black;
     border-radius: 10px;
     box-shadow: 4px 4px rgb(59, 59, 59);
+    margin-bottom: min(50px, 10vw);
 }
 
 .row {
     width: 100%;
-    margin: 70px 0;
+    margin: min(70px, 15vw) 0;
     align-items: center;
     padding: 50px 0 50px 0;
 }
@@ -119,12 +120,12 @@
 }
 
 .feature {
-    font-size: 3rem;
+    font-size: min(3rem, 7vw);
     font-family: 'Secular One', sans-serif;
 }
 
 .featureDetail {
-    font-size: 1.5rem;
+    font-size: min(1.5rem, 3.5vw);
     color: #936fa1;
     font-weight: 500;
 }
@@ -195,13 +196,16 @@
     width: 100%;
     background-color: #9a59e6;
     margin-top: 50px;
-    padding: 100px;
+    padding-top: min(100px, 10vw);
+    padding-bottom: min(100px, 10vw);
+    display: flex;
+    flex-direction: column;
 }
 
 .getStartedP {
     width: fit-content;
     margin: auto;
-    font-size: 3rem;
+    font-size: min(3rem, 7vw);
     font-family: 'Playfair Display', serif;
     color: white;
     text-align: center;
@@ -211,8 +215,8 @@
     width: fit-content;
     height: fit-content;
     margin: auto;
-    font-size: 2rem;
-    padding: 30px;
+    font-size: min(2rem, 5vw);
+    padding: min(30px, 5vw);
 }
 
 .getStartedButton button {
@@ -223,5 +227,5 @@
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 1.5rem;
+    font-size: min(1.5rem, 3.5vw);
 }

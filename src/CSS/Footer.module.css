@@ -8,7 +8,7 @@
     text-align: center;
     width: fit-content;
     margin: auto;
-    font-size: 1.5rem;
+    font-size: min(1.5rem, 4vw);
 }
 
 .container {
@@ -23,6 +23,7 @@
 .col {
     color: var(--clr2);
     text-align: center;
+    font-size: min(1rem, 3.5vw);
 }
 
 .link {

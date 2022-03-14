@@ -86,7 +86,7 @@ function getStartedButton() {
                     <button type='button'>Get Started</button>
                 </Link>
             </div>
-            <div className={styles.getStartedP} style={{fontSize: '1.4rem', marginTop: '35px'}}>
+            <div className={styles.getStartedP} style={{fontSize: 'min(1.4rem, 4.3vw)', marginTop: '35px'}}>
                 <p>Learn more below</p>
             </div>
         </section>
