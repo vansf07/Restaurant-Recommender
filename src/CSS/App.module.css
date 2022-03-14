@@ -120,12 +120,12 @@
 }
 
 .feature {
-    font-size: min(3rem, 7vw);
+    font-size: min(3rem, 8vw);
     font-family: 'Secular One', sans-serif;
 }
 
 .featureDetail {
-    font-size: min(1.5rem, 3.5vw);
+    font-size: min(1.5rem, 4vw);
     color: #936fa1;
     font-weight: 500;
 }

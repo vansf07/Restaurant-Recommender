@@ -46,6 +46,7 @@
 
 .hmbg {
     background-color: lightgray;
+    border: 1px black solid;
     width: 20px;
     height: 2px;
     margin: 5px;
