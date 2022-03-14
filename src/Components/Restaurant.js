@@ -6,6 +6,10 @@ import Header from './Header';
 
 import styles from '../CSS/Restaurant.module.css';
 
+import i1 from '../assets/res1_1.jfif';
+import i2 from '../assets/res1_2.jfif';
+import i3 from '../assets/res1_3.jfif';
+
 function ratingStars(rating) {
     let stars = [];
 
@@ -34,7 +38,7 @@ function ratingStarsSmall(rating) {
 
 function reviewBlock(reviews, element_key) {
     return (
-        <div key={element_key}>
+        <div key={element_key} className={`col ${styles.reviewBlock}`}>
             <p>{reviews[0]} <span>{ ratingStarsSmall(reviews[1]) }</span></p>
             <p>{reviews[2]}</p>
         </div>
@@ -51,8 +55,10 @@ function reviewBlocks(xs) {
 
 function images(links) {
     return (
-        <div>
-            Images
+        <div className={`${styles.imageSlide}`}>
+            <img src={i1} alt="pic1" />
+            <img src={i2} alt="pic2" />
+            <img src={i3} alt="pic3" />
         </div>
     );
 }
@@ -61,32 +67,30 @@ function images(links) {
 function restaurantInfo(props) {
     // console.log(props);
     return (
-        <div>
-            <div>
-                <h3>Shanti Sagar</h3>
-                <p>South Indian, Chinese</p>
-                <p>Pure veg</p>
+        <div className={`container ${styles.container}`}>
+            <div className={`row row-cols-1 ${styles.main}`}>
+                <h3 className={`col ${styles.col}`}>Shanti Sagar</h3>
+                <p className={`col ${styles.col}`}>South Indian, Chinese</p>
+                <p className={`col ${styles.col}`}>Pure veg</p>
+                <span>{ ratingStars(4) }</span>
             </div>
-            <div>
-                <div>
-                    Rating
-                    <span>{ ratingStars(4) }</span>
-                </div>
-                <div>
-                    <p>Reviews</p>
-                    <div>
+
+            <div className={`row ${styles.images}`}>
+                { images(["/api/images/res1_1.png", "/api/images/res1_2.png"]) }
+            </div>
+            
+            <div className={`row ${styles.reviewContainer}`}>
+                <p>Reviews</p>
+                <div className={`container`}>
+                    <div className='row row-cols-1 row-cols-sm-2 g-2'>
                         {
                             reviewBlocks([
                                 ["User 1", 3, "Ok"],
-                                ["User 2", 5, "Very nice food"]
+                                ["User 2", 5, "Very nice food"],
+                                ["User 3", 4, "Good service"]
                             ])
                         }
                     </div>
-                </div>
-            </div>
-            <div>
-                <div>
-                    { images(["/api/images/res1_1.png", "/api/images/res1_2.png"]) }
                 </div>
             </div>
         </div>
@@ -101,7 +105,9 @@ export default function Restaurant(props) {
     return (
         <>
         <Header />
-        { restaurantInfo(props) }
+        <section className={`${styles.section}`}>
+            { restaurantInfo(props) }
+        </section>
         <Footer />
         </>
     );
