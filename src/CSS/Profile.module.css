@@ -3,7 +3,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Domine&display=swap');
 @import url('https://images.unsplash.com/photo-1511688878353-3a2f5be94cd7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80');
 .main {
-    background-color: rgb(169, 111, 235, 0.7);
+    background-color: rgb(169, 111, 235, 0.6);
     background-attachment: fixed; 
     background-size: cover;
     display: grid;
@@ -14,7 +14,7 @@
 }
 .container {
     width: 30rem;
-    height: 4rem;
+    height: 5rem;
     box-shadow: 0 0 1rem 0 rgba(0, 0, 0, .2);
     border-radius: 5px;
     position: relative;
@@ -36,17 +36,16 @@
     left: 0;
     right: 0;
     bottom: 0;
-    box-shadow: inset 0 0 2000px rgba(255, 255, 255, .4);
+    box-shadow: inset 0 0 2000px rgba(255, 255, 255, .6);
     filter: blur(10px);
 }
 .container {
     background: inherit;
 }
 h1 {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Preahvihear', sans-serif;
     text-align: center;
-    margin-top: 5%;
-    margin-bottom: 3%;
+    margin: 3%;
 }
 
 .profilebg {
@@ -66,9 +65,10 @@ img {
 }
 
 h2 {
-    font-family: 'Preahvihear', sans-serif;
+    font-family: 'Playfair Display', serif;
     text-align: center;
-    margin: 3%;
+    margin-top: 5%;
+    margin-bottom: 3%;
 }
 
 .content {
@@ -80,4 +80,10 @@ h2 {
 
 span {
     font-weight: bold;
+}
+
+.card {
+    margin: 0 auto;
+    margin-top: 3%;
+    width: 30%;
 }
