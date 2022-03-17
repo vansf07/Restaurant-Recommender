@@ -10,7 +10,7 @@ import i1 from '../assets/res1_1.jfif';
 import i2 from '../assets/res1_2.jfif';
 import i3 from '../assets/res1_3.jfif';
 
-function ratingStars(rating) {
+export function ratingStars(rating) {
     let stars = [];
 
     for(let i = 0; i < 5; i++, rating--) {

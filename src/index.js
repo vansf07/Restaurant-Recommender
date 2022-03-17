@@ -8,6 +8,7 @@ import Login from './Components/Login';
 import SignUp from './Components/Signup';
 import Profile from './Components/Profile';
 import Restaurant from './Components/Restaurant';
+import Recommender from './Components/Recommender';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -18,6 +19,7 @@ ReactDOM.render(
             <Route path="/signin" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/restaurant/:id" element={<Restaurant />}/>
+            <Route path="/recommender" element={<Recommender />} />
       </Routes>
       </BrowserRouter>
   </React.StrictMode>,

@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Preahvihear&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Domine&display=swap');
+.main {
+    background-color: #6ac8af;
+    background-attachment: fixed; 
+    background-size: cover;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    min-height: 100vh;
+    width:100%
+}
+.body {
+    background-color: #6ac8af;
+}
+.heading {
+    font-family: 'Preahvihear', sans-serif;
+    text-align: center;
+}
+.content {
+    font-family: 'Domine', serif;
+    margin-left: 10%;
+    text-align: left;
+    font-size: large;
+}
+.restaurantpic {
+    text-align: right;
+    float:right;
+}
+span {
+    font-weight: bold;
+}
+
+.cardR {
+    margin: 0 auto;
+    width: 70%;
+}
+@media (max-width: 600px)
+{
+    .card {
+        min-width: 75%;
+    }
+}
+
+.headingR {
+    font-family: 'Playfair Display', serif;
+    text-align: left;
+    font-size: 250%;
+}
