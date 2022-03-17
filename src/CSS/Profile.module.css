@@ -56,7 +56,7 @@ h1 {
     position: relative;
 }
 
-img {
+.profilepic {
     padding-top: 5%;
     width: 20%;
     height:auto;
