@@ -15,8 +15,10 @@ class Profile extends Component {
     state = {}
     render() {
         return (
+            <>
+            <Header />
             <div className={styles.main}>
-                <Header />
+                
                 <img className={styles.profilepic} src={profilepic} alt="profile"></img>
                 <div className={styles.container}><h1 className={styles.heading1}>Rani Kumar</h1></div>
                 <Card className={styles.card}>
@@ -43,9 +45,10 @@ class Profile extends Component {
                     <span>Mobile Number:</span> +91987456231 <br />
                     <span className={styles.email}> Email address:</span> rani.kumar@gmail.com <br />
                     </CardContent>
-                </Card>
-                <Footer />
+                </Card>              
             </div>
+            <Footer />
+            </>
         );
     }
 }
