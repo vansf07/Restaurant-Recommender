@@ -21,11 +21,11 @@ class Profile extends Component {
                 <div className={styles.container}><h1>Rani Kumar</h1></div>
                 <Card className={styles.card}>
                     <CardContent style={{backgroundColor: "#e4dfda"}}>
-                    <h2>Contact Details</h2>    
-                    <span>Mobile Number:</span> +91987456231 <br />
-                    <span> Email address:</span> rani.kumar@gmail.com <br />
+                    <h2>Food</h2>    
+                    <span>Food Preference:</span> Indian, Chinese <br />
+                    <span> Dietary Preferences:</span> Vegetarian, No Egg <br />
                     </CardContent>
-                </Card>
+                </Card>              
                 <Card className={styles.card}>
                     <CardContent style={{backgroundColor: "#e4dfda"}}>
                     <h2>Address</h2>    
@@ -39,9 +39,9 @@ class Profile extends Component {
                 </Card>
                 <Card className={styles.card}>
                     <CardContent style={{backgroundColor: "#e4dfda"}}>
-                    <h2>Food</h2>    
-                    <span>Food Preference:</span> Indian, Chinese <br />
-                    <span> Dietary Preferences:</span> Vegetarian, No Egg <br />
+                    <h2>Contact Details</h2>    
+                    <span>Mobile Number:</span> +91987456231 <br />
+                    <span className={styles.email}> Email address:</span> rani.kumar@gmail.com <br />
                     </CardContent>
                 </Card>
                 <Footer />
