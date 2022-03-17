@@ -27,6 +27,7 @@ class Header extends Component {
                         <div className={`col ${styles.col}`}><Link className={`link ${styles.link}`} to="/signin">LogIn</Link></div>
                         <div className={`col ${styles.col}`}><Link className={`link ${styles.link}`} to="/signup">SignUp</Link></div>
                         <div className={`col ${styles.col}`}><Link className={`link ${styles.link}`} to="/profile">Profile</Link></div>
+                        <div className={`col ${styles.col}`}><Link className={`link ${styles.link}`} to="/recommender">Recommender</Link></div>
                     </div>
                 </nav>
             </div>
