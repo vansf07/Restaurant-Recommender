@@ -43,7 +43,7 @@
 .container {
     background: inherit;
 }
-h1 {
+.heading1 {
     font-family: 'Preahvihear', sans-serif;
     text-align: center;
     margin: 3%;
@@ -65,7 +65,7 @@ h1 {
     display: flex;
 }
 
-h2 {
+.heading2 {
     font-family: 'Playfair Display', serif;
     text-align: center;
     margin-top: 5%;
