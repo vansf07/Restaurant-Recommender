@@ -6,6 +6,7 @@
     background-attachment: fixed; 
     background-size: cover;
     display: grid;
+    grid-template-rows: 25% max-content;
     align-items: center;
     justify-content: center;
     position: relative;
@@ -39,10 +40,23 @@ span {
 }
 @media (max-width: 600px)
 {
-    .card {
+    .cardR {
         min-width: 75%;
     }
 }
+@media (max-width: 350px)
+{
+    .heading {
+        font-size: 5vw;
+    }
+    .headingR {
+        font-size: 10vw !important;
+    }
+    .cardR {
+        zoom: 50%;
+    }
+}
+
 
 .headingR {
     font-family: 'Playfair Display', serif;

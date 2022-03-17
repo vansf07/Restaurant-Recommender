@@ -18,17 +18,17 @@ class Profile extends Component {
             <div className={styles.main}>
                 <Header />
                 <img className={styles.profilepic} src={profilepic} alt="profile"></img>
-                <div className={styles.container}><h1>Rani Kumar</h1></div>
+                <div className={styles.container}><h1 className={styles.heading1}>Rani Kumar</h1></div>
                 <Card className={styles.card}>
                     <CardContent style={{backgroundColor: "#e4dfda"}}>
-                    <h2>Food</h2>    
+                    <h2 className={styles.heading2}>Food</h2>    
                     <span>Food Preference:</span> Indian, Chinese <br />
                     <span> Dietary Preferences:</span> Vegetarian, No Egg <br />
                     </CardContent>
                 </Card>              
                 <Card className={styles.card}>
                     <CardContent style={{backgroundColor: "#e4dfda"}}>
-                    <h2>Address</h2>    
+                    <h2 className={styles.heading2}>Address</h2>    
                     <span>Address Line 1: </span> Shivaji Chaurastha <br />
                     <span>Address Line 2: </span>Sundar Nagar, Bandra West <br />
                     <span>City: </span>Mumbai<br /> 
@@ -39,7 +39,7 @@ class Profile extends Component {
                 </Card>
                 <Card className={styles.card}>
                     <CardContent style={{backgroundColor: "#e4dfda"}}>
-                    <h2>Contact Details</h2>    
+                    <h2 className={styles.heading2}>Contact Details</h2>    
                     <span>Mobile Number:</span> +91987456231 <br />
                     <span className={styles.email}> Email address:</span> rani.kumar@gmail.com <br />
                     </CardContent>

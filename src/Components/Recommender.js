@@ -7,8 +7,8 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
 import Button from '@mui/material/Button';
-import CardMedia from '@mui/material/CardMedia';
 import {ratingStars} from './Restaurant';
+import { Link } from 'react-router-dom';
 /*
 <CardMedia
                         component="img"
@@ -24,9 +24,8 @@ class Recommender extends Component {
             <div className={styles.body}>
             <Header />
             <div className={styles.main}>
-                
                 <h1 className={styles.heading}>Hello Rani Kumar, are you ready to explore?</h1>
-                <Card className={styles.cardR}>
+                <div><Card className={styles.cardR} style={{ backgroundColor: "#e4dfda" }}>
                     <CardContent style={{ backgroundColor: "#e4dfda" }}>
                         <img src={i1} className={styles.restaurantpic}></img>
                         <span className={styles.headingR}>Shanti Sagar</span>  <br />
@@ -34,9 +33,10 @@ class Recommender extends Component {
                         <span>Ratings: </span><span>{ ratingStars(4) }</span> <br />
                     </CardContent>
                     <CardActions style={{ backgroundColor: "#e4dfda" }}>
-                        <Button size="small">Learn More</Button>
+                        <Link to="/restaurant/1"><Button size="small">Learn More</Button></Link>
                     </CardActions>
-                </Card>                
+                </Card> 
+                </div>               
             </div>
             <Footer />
             </div>
