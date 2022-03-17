@@ -46,9 +46,9 @@ function getLanding(props) {
 
 function getFeatureTable(props) {
     return (
-        <section id="features">
+        <section id="features" className={styles.featuresSection}>
             <p className={styles.featuresHeading}>What do we offer?</p>
-            <div className={`container ${styles.featuresTable}`}>
+            <div className={`container ${styles.featuresTable} ${styles.body}`}>
                 <div className={`row row-cols-1 row-cols-md-2 justify-content-evenly ${styles.row}`}>
                     <div className={`col featureLeft ${styles.col} ${styles.feature}`}>Recommendations</div>
                     <div className={`col featureRight ${styles.col} ${styles.featureDetail}`}>Let us suggest what you should try next</div>
@@ -96,13 +96,15 @@ function getStartedButton() {
 class App extends Component {
     render() { 
         return (
+            <>
+            <Header />
             <div className={styles.body}>
-                <Header />
                 { getLanding(this.props) }
                 { getStartedButton() }
                 { getFeatureTable(this.props) }
-                <Footer />
             </div>
+            <Footer />
+            </>
         );
     }
 

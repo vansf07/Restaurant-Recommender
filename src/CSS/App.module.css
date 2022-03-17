@@ -91,6 +91,10 @@
     }
 }
 
+.featuresSection {
+    padding-bottom: min(50px, 10vw);
+}
+
 .featuresHeading {
     font-size: min(2rem, 5vw);
     width: fit-content;
@@ -105,7 +109,7 @@
     border: 1px solid black;
     border-radius: 10px;
     box-shadow: 4px 4px rgb(59, 59, 59);
-    margin-bottom: min(50px, 10vw);
+    
 }
 
 .row {
