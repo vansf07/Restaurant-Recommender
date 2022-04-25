@@ -5,3 +5,12 @@
  - Tejaswi Hegde (201IT163)
  - Ranajana Kambhammettu (201IT247)
  - Vanessa Maria Fernandes (201IT164)
+
+## TODO
+
+Backend
+- Database - MongoDB
+- Flask for backend - host it on glitch
+- User services
+- - change prefs
+

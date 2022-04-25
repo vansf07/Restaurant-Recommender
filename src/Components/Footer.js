@@ -15,13 +15,13 @@ class Footer extends Component {
             <footer className={`${styles.footer}`}>
                 <a href="#top" className={`${styles.link}`}><p className={`${styles.backToTop} ${styles.linkText}`}>Back to top</p></a>
                 <br />
-                <div className={`container ${styles.container}`}>
+                {/* <div className={`container ${styles.container}`}>
                     <div className={`row col-1 col-sm-3 justify-content-evenly ${styles.row}`}>
                         <div className={`col ${styles.col}`}>Link 1</div>
                         <div className={`col ${styles.col}`}>Link 2</div>
                         <div className={`col ${styles.col}`}>Link 3</div>
                     </div>
-                </div>
+                </div> */}
             </footer>
         );
     }
