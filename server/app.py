@@ -2,7 +2,7 @@ import os
 from flask import Flask, send_from_directory, request, session
 from pymongo import MongoClient
 
-DB_URL = "mongodb://localhost:27017"
+DB_URL = "mongodb+srv://ranjana:HR0xrwSLVIrpEjSZ@clusterrrs.kmsjh.mongodb.net/test"
 
 dbClient = MongoClient(DB_URL)
 credentials = dbClient.restrecom.credentials
