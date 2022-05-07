@@ -20,6 +20,7 @@ class Main extends Component {
         try {
             let resp = await fetch(`http://localhost:5000/api/login`, {
                 method: 'POST',
+                credentials: "include",
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -43,7 +44,8 @@ class Main extends Component {
     handleLogout = async () => {
         try {
             let resp = await fetch(`http://localhost:5000/api/logout`, {
-                method: 'POST'
+                method: 'POST',
+                credentials: 'include'
             })
 
             resp = await resp.json();
@@ -61,7 +63,8 @@ class Main extends Component {
     handleFetchProfile = async () => {
         try {
             let resp = await fetch(`http://localhost:5000/api/profile`, {
-                method: 'GET'
+                method: 'GET',
+                credentials: 'include'
             })
 
             resp = await resp.json();
