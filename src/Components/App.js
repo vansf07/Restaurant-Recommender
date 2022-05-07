@@ -3,9 +3,6 @@ import { Link } from 'react-router-dom';
 
 import styles from '../CSS/App.module.css';
 
-import Footer from './Footer';
-import Header from './Header';
-
 const observerLeft = new IntersectionObserver(entries => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -96,15 +93,11 @@ function getStartedButton() {
 class App extends Component {
     render() { 
         return (
-            <>
-            <Header />
             <div className={styles.body}>
                 { getLanding(this.props) }
                 { getStartedButton() }
                 { getFeatureTable(this.props) }
             </div>
-            <Footer />
-            </>
         );
     }
 

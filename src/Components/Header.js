@@ -24,10 +24,11 @@ class Header extends Component {
                 <nav className={`navbar container ${styles.navbar}`}>
                     <div className="row justify-content-end">
                         <div className={`col ${styles.col}`}><Link className={`link ${styles.link}`} to="/">Home</Link></div>
-                        <div className={`col ${styles.col}`}><Link className={`link ${styles.link}`} to="/signin">LogIn</Link></div>
-                        <div className={`col ${styles.col}`}><Link className={`link ${styles.link}`} to="/signup">SignUp</Link></div>
-                        <div className={`col ${styles.col}`}><Link className={`link ${styles.link}`} to="/profile">Profile</Link></div>
-                        <div className={`col ${styles.col}`}><Link className={`link ${styles.link}`} to="/recommender">Recommender</Link></div>
+                        {!this.props.isLoggedIn && <div className={`col ${styles.col}`}><Link className={`link ${styles.link}`} to="/signin">LogIn</Link></div>}
+                        {!this.props.isLoggedIn && <div className={`col ${styles.col}`}><Link className={`link ${styles.link}`} to="/signup">SignUp</Link></div>}
+                        {this.props.isLoggedIn && <div className={`col ${styles.col}`}><Link className={`link ${styles.link}`} to="/profile">Profile</Link></div>}
+                        {this.props.isLoggedIn && <div className={`col ${styles.col}`}><Link className={`link ${styles.link}`} to="/recommender">Recommender</Link></div>}
+                        {this.props.isLoggedIn && <div className={`col ${styles.col}`}><button className={`link ${styles.logout}`}>Logout</button></div>}
                     </div>
                 </nav>
             </div>

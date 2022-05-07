@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import styles from '../CSS/Profile.module.css';
 import profilepic from '../assets/jayant-dassz-u08NEYUYvig-unsplash.jpg';
-import Footer from './Footer';
-import Header from './Header';
 //import bgpic from '../assets/edgar-castrejon-1CsaVdwfIew-unsplash.jpg';
 //import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
@@ -16,7 +14,6 @@ class Profile extends Component {
     render() {
         return (
             <div className={styles.main}>
-                <Header />
                 <img className={styles.profilepic} src={profilepic} alt="profile"></img>
                 <div className={styles.container}><h1 className={styles.heading1}>Rani Kumar</h1></div>
                 <Card className={styles.card}>
@@ -44,7 +41,6 @@ class Profile extends Component {
                     <span className={styles.email}> Email address:</span> rani.kumar@gmail.com <br />
                     </CardContent>
                 </Card>
-                <Footer />
             </div>
         );
     }

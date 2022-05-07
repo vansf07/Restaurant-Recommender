@@ -1,12 +1,10 @@
 import React, { Component } from "react";
 import '../CSS/login.signup.css'
-import Header from './Header';
 
 export default class Login extends Component {
     render() {
         return (
             <div className="outer">
-                <Header/>
                 <div className="inner"><form>
                     <h3>Log In</h3>
 

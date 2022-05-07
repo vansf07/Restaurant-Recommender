@@ -56,6 +56,11 @@
     display: none;
 }
 
+.logout {
+    border: 0;
+    background-color: var(--clr1);
+}
+
 @media screen and (max-width: 576px) {
     .collapsibleMenu {
         display: none;

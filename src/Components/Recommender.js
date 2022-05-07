@@ -22,7 +22,6 @@ class Recommender extends Component {
     render() {
         return (
             <div className={styles.body}>
-            <Header />
             <div className={styles.main}>
                 <h1 className={styles.heading}>Hello Rani Kumar, are you ready to explore?</h1>
                 <div><Card className={styles.cardR} style={{ backgroundColor: "#e4dfda" }}>
@@ -38,7 +37,6 @@ class Recommender extends Component {
                 </Card> 
                 </div>               
             </div>
-            <Footer />
             </div>
         );
     }

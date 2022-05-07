@@ -1,9 +1,6 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 
-import Footer from './Footer';
-import Header from './Header';
-
 import styles from '../CSS/Restaurant.module.css';
 
 import i1 from '../assets/res1_1.jfif';
@@ -103,12 +100,8 @@ export default function Restaurant(props) {
     console.log(id);
 
     return (
-        <>
-        <Header />
         <section className={`${styles.section}`}>
             { restaurantInfo(props) }
         </section>
-        <Footer />
-        </>
     );
 };
