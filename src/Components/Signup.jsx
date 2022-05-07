@@ -1,8 +1,13 @@
 import React, { Component } from "react";
+import { Navigate } from "react-router-dom";
 import '../CSS/login.signup.css'
 
 export default class SignUp extends Component {
     render() {
+        if(this.props.isLoggedIn) {
+            return <Navigate to="/profile" />
+        }
+
         return (
             <div className="outer">
                 <div className="inner">

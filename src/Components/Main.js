@@ -13,16 +13,57 @@ class Main extends Component {
     state = { 
         isLoggedIn: false,
         username: null,
-     }
+    }
+
+    handleLogin = async (username, password) => {
+        try {
+            let resp = await fetch(`http://localhost:5000/api/login`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({username, password})
+            });
+
+            resp = await resp.json();
+            console.log(resp);
+
+            if(resp.success) {
+                this.setState({ isLoggedIn: true, username: resp.username })
+            } else {
+                this.setState({ isLoggedIn: false, username: null })
+            }
+        } catch (err) {
+            console.error(err);
+        }
+    }
+
+    handleLogout = async () => {
+        try {
+            let resp = await fetch(`http://localhost:5000/api/logout`, {
+                method: 'POST'
+            })
+
+            resp = await resp.json();
+            console.log(resp);
+            
+            if(resp.success) {
+                this.setState({ isLoggedIn: false, username: null });
+            }
+
+        } catch (err) {
+            console.error(err);
+        }
+    }
 
     render() { 
         return (
             <BrowserRouter>
-                <Header {...this.state} />
+                <Header {...this.state} handleLogout={this.handleLogout} />
             <Routes>
                     <Route path="/" element={<App {...this.state} />} />
                     <Route path="/profile" element={<Profile {...this.state} />} />
-                    <Route path="/signin" element={<Login {...this.state} />} />
+                    <Route path="/signin" element={<Login {...this.state} handleLogin={this.handleLogin} />} />
                     <Route path="/signup" element={<SignUp {...this.state} />} />
                     <Route path="/restaurant/:id" element={<Restaurant {...this.state} />}/>
                     <Route path="/recommender" element={<Recommender {...this.state} />} />

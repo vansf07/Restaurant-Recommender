@@ -6,12 +6,17 @@ import profilepic from '../assets/jayant-dassz-u08NEYUYvig-unsplash.jpg';
 import Card from '@mui/material/Card';
 //import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
+import { Navigate } from 'react-router-dom';
 //import Button from '@mui/material/Button';
 //import Typography from '@mui/material/Typography';
 //<h1>Profile</h1>
 class Profile extends Component {
     state = {}
     render() {
+        if(!this.props.isLoggedIn) {
+            return <Navigate to="/signin" />
+        }
+
         return (
             <div className={styles.main}>
                 <img className={styles.profilepic} src={profilepic} alt="profile"></img>

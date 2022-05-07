@@ -28,7 +28,7 @@ class Header extends Component {
                         {!this.props.isLoggedIn && <div className={`col ${styles.col}`}><Link className={`link ${styles.link}`} to="/signup">SignUp</Link></div>}
                         {this.props.isLoggedIn && <div className={`col ${styles.col}`}><Link className={`link ${styles.link}`} to="/profile">Profile</Link></div>}
                         {this.props.isLoggedIn && <div className={`col ${styles.col}`}><Link className={`link ${styles.link}`} to="/recommender">Recommender</Link></div>}
-                        {this.props.isLoggedIn && <div className={`col ${styles.col}`}><button className={`link ${styles.logout}`}>Logout</button></div>}
+                        {this.props.isLoggedIn && <div className={`col ${styles.col}`}><button className={`link ${styles.logout}`} onClick={this.props.handleLogout}>Logout</button></div>}
                     </div>
                 </nav>
             </div>
