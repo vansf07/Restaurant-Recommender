@@ -1,5 +1,6 @@
 import os
 from flask import Flask, send_from_directory, request, session
+from flask_cors import CORS
 from pymongo import MongoClient
 
 DB_URL = "mongodb+srv://ranjana:HR0xrwSLVIrpEjSZ@clusterrrs.kmsjh.mongodb.net/test"
@@ -13,18 +14,24 @@ app.config["SESSION_TYPE"] = "mongodb"
 app.config["SESSION_MONGODB"] = dbClient
 app.secret_key = "thisissupposedtobeasecret"
 
+app.config["CORS_ORIGINS"] = "*"
+CORS(app)
+
 # API Paths
 
 def is_valid_login(username, password):
-    p = credentials.find_one({"username": username, "password": password})
+    # p = credentials.find_one({"username": username, "password": password})
+    p = (username == "a@b" and password == "asdf")
+    return p
     if p is None:
         return False
     return True
 
 @app.route('/api/login', methods=['POST'])
 def login():
-    username = str(request.args.get('username'))
-    password = str(request.args.get('password'))
+    body = request.get_json()
+    username = str(body['username'])
+    password = str(body['password'])
     
     if username is None or password is None:
         return {
@@ -34,7 +41,8 @@ def login():
     if is_valid_login(username, password):
         session['name'] = username
         return {
-            "success": True
+            "success": True,
+            "username": username
         }
     else:
         return {
