@@ -13,6 +13,7 @@ class Main extends Component {
     state = { 
         isLoggedIn: false,
         username: null,
+        profileInfo: null,
     }
 
     handleLogin = async (username, password) => {
@@ -30,8 +31,9 @@ class Main extends Component {
 
             if(resp.success) {
                 this.setState({ isLoggedIn: true, username: resp.username })
+                this.handleFetchProfile();
             } else {
-                this.setState({ isLoggedIn: false, username: null })
+                this.setState({ isLoggedIn: false, username: null, profileInfo: null })
             }
         } catch (err) {
             console.error(err);
@@ -46,9 +48,27 @@ class Main extends Component {
 
             resp = await resp.json();
             console.log(resp);
-            
+
             if(resp.success) {
-                this.setState({ isLoggedIn: false, username: null });
+                this.setState({ isLoggedIn: false, username: null, profileInfo: null });
+            }
+
+        } catch (err) {
+            console.error(err);
+        }
+    }
+
+    handleFetchProfile = async () => {
+        try {
+            let resp = await fetch(`http://localhost:5000/api/profile`, {
+                method: 'GET'
+            })
+
+            resp = await resp.json();
+            console.log(resp);
+
+            if(resp.success) {
+                this.setState({ profileInfo: resp.profile });
             }
 
         } catch (err) {

@@ -27,6 +27,13 @@ def is_valid_login(username, password):
         return False
     return True
 
+def fetchProfileFromDB(username):
+    return {
+        "name": "Rani Kumar",
+        "age": "16",
+        "foodPreference": "whatever"
+    }
+
 @app.route('/api/login', methods=['POST'])
 def login():
     body = request.get_json()
@@ -52,11 +59,23 @@ def login():
 
 @app.route('/api/logout', methods=['POST'])
 def logout():
-    if 'name'in session and session['name']:
+    if 'name' in session and session['name']:
         session.pop('name', default=None)
 
     return {
         "success": True
+    }
+
+@app.route('/api/profile', methods=['GET'])
+def getProfile():
+    if 'name' in session and session['name']:
+        return {
+            "success": True,
+            "profile": fetchProfileFromDB(session['name'])
+        }
+    
+    return {
+        "success": False
     }
 
 
