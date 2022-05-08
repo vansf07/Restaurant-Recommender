@@ -31,12 +31,7 @@ def is_valid_login(username, password):
 
 def fetchProfileFromDB(username):
     print("Fetching profile for", username)
-    print(db.profiles.find_one({ "username": username }))
-    return {
-        "name": "Rani Kumar",
-        "age": "16",
-        "foodPreference": "whatever"
-    }
+    return db.profiles.find_one({ "username": username })
 
 def registerUser(name, tel, username, password):
     db.profiles.insert_one({
