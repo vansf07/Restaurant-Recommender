@@ -38,7 +38,8 @@ def registerUser(name, tel, username, password):
         '_id':  username,
         'username': username,
         'name': name,
-        'tel': tel
+        'tel': tel,
+        'visited': []
     })
     
     db.credentials.insert_one({ '_id':  username, "username": username, "password": password })

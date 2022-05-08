@@ -50,7 +50,7 @@ class Preferences extends Component {
                             <select className="form-select" value={this.state.diet} onChange={(e) => this.handleChange('diet', e.target.value)}>
                                 <option value="veg">Vegetarian</option>
                                 <option value="nonveg">Non-Vegetarian</option>
-                                <option selected value="vegan">Vegan</option>
+                                <option value="vegan">Vegan</option>
                                 <option value="noegg">No Egg</option>
                                 <option value="allergy">Allergies</option>
                             </select>

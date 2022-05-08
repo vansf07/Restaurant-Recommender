@@ -60,6 +60,7 @@ class Recommender extends Component {
                 console.error(err);
             }
         }
+        console.log(this.rests);
     }
 
     render() {
