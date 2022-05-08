@@ -165,7 +165,7 @@ def getRestInfo():
         'info': info
     }
 
-@app.route('/api/restaurant', methods=['GET'])
+@app.route('/api/recommendations', methods=['GET'])
 @cross_origin(supports_credentials=True)
 def getRecommendation():
     if 'name' in session and session['name']:
