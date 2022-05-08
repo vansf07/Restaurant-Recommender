@@ -43,7 +43,7 @@ class Profile extends Component {
                     <CardContent style={{backgroundColor: "#e4dfda"}}>
                     <h2 className={styles.heading2}>Food</h2>    
                     <span>Food Preference:</span> {p.cuisine} <br />
-                    <span> Dietary Preferences:</span> {p.diet} <br />
+                    {/*<span> Dietary Preferences:</span> {p.diet} <br />*/}
                     </CardContent>
                 </Card>              
                 <Card className={styles.card}>

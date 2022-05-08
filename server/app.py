@@ -2,6 +2,14 @@ import os
 from flask import Flask, send_from_directory, request, session
 from flask_cors import CORS, cross_origin
 from pymongo import MongoClient
+import numpy as np 
+import pandas as pd 
+import json
+import re
+import os
+from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
+from nltk.corpus import stopwords
 
 # DB_URL = "mongodb+srv://ranjana:HR0xrwSLVIrpEjSZ@clusterrrs.kmsjh.mongodb.net/test"
 DB_URL = "mongodb://tejaswi:ehVg5Gz5mKhHEweA@cluster0-shard-00-00.l3sve.mongodb.net:27017,cluster0-shard-00-01.l3sve.mongodb.net:27017,cluster0-shard-00-02.l3sve.mongodb.net:27017/myFirstDatabase?ssl=true&replicaSet=atlas-4n7rhb-shard-0&authSource=admin&retryWrites=true&w=majority"
@@ -47,7 +55,7 @@ def registerUser(name, tel, username, password):
 def updateProfilePref(name, diet, cuisine, address):
     fl = { 'username': name }
     upd = {
-        'diet': diet,
+        # 'diet': diet,
         'cuisine': cuisine,
         'address': address
     }
@@ -59,9 +67,69 @@ def getRestaurantFromDB(id):
 def getAIRecommendation(username):
     user = db.profiles.find_one({ "username": username })
     visited = user['visited']
-    diet = user['diet']
+    # diet = user['diet']
     cuisine = user['cuisine']
+    df = pd.DataFrame.from_dict(restaurants)
+    # df.head()
+    df["combined_text"] =  df["Cuisine"] + " " + df["Address"]
     
+    """stopwords = stopwords.words('english')
+    df['text_without_stopwords'] = df['combined_text'].apply(lambda x: ' '.join([word for word in x.split() if word not in (stopwords)]))
+    cv = CountVectorizer()
+    count_matrix = cv.fit_transform(df['text_without_stopwords'])"""
+
+    tf = TfidfVectorizer(analyzer = "word", ngram_range=(1,2), min_df=0, stop_words='english')
+    tfidf_matrix = tf.fit_transform(df['combined_text'])
+    cosine =  cosine_similarity(tfidf_matrix, tfidf_matrix)
+
+    def get_name_from_index(Index):
+        return df[df.restaurant_id == Index]["Name"].values[0]
+    def get_index_from_name(Name):
+        return df[df.Name == Name]["restaurant_id"].values[0]
+
+    def get_recommendations(restaurant):
+        restaurant_index = get_index_from_name(restaurant)
+        similar_restaurants = list(enumerate(cosine[restaurant_index]))
+        sortedrestaurants = sorted(similar_restaurants, key = lambda x:x[1], reverse=True)[1:]
+        i = 0
+        for restaurant in sortedrestaurants:
+            print(get_name_from_index(restaurant[0]))
+            i = i+1
+            if i>2:
+                break
+    def recommend(json_object):
+        temp_name = ""
+        print('Your recommendations are:')
+        if not json_object['restaurants_visited']:
+            food = json_object['cuisine']
+            j = 0
+            for i in df['Cuisine']:
+                if i.find(food)!=-1:
+                    ind = j
+                    temp_name = get_name_from_index(df.restaurant_id)
+                break
+                j += 1
+            get_recommendations(temp_name)
+        else:
+            for title in json_object['restaurants_visited']:
+                get_recommendations(title)
+        print('Which of these restaurants are you choosing today? Enter the name: ')
+        chosen = input()
+        return chosen
+
+    temp = {'name': name , 'password': password, 'cuisine': food, 'address': address, 'restaurants_visited': []}
+    json_object = json.dumps(temp, indent = 4)
+    with open("user.json", "w") as outfile:
+            outfile.write(json_object)
+    with open('user.json', 'r') as openfile:
+        json_object = json.load(openfile)
+        print(json_object)
+        a = recommend(json_object)
+        temp = temp['restaurants_visited'].append(a)
+        json_object = json.dumps(temp, indent = 4)
+        with open("user.json", "w") as outfile:
+            outfile.write(json_object)
+
     return [1, 2, 3]
 
 @app.route('/api/signup', methods=['POST'])
@@ -140,11 +208,11 @@ def getProfile():
 def updatePrefs():
     if 'name' in session and session['name']:
         body = request.get_json()
-        diet = str(body['diet'])
+        # diet = str(body['diet'])
         cuisine = str(body['cuisine'])
         address = str(body['address'])
         
-        updateProfilePref(session['name'], diet, cuisine, address)
+        updateProfilePref(session['name'],  cuisine, address)
         
         return {
             "success": True,
