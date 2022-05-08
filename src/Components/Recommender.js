@@ -17,6 +17,51 @@ import { Link, Navigate } from 'react-router-dom';
 */
 class Recommender extends Component {
     state = {}
+
+    rests = [];
+
+    async componentDidMount() {
+        if(!this.props.isLoggedIn) {
+            return;
+        }
+
+        try {
+            let resp = await fetch(`http://localhost:5000/api/recommendations`, {
+                method: 'GET',
+                credentials: 'include'
+            })
+
+            resp = await resp.json();
+            console.log(resp);
+
+            if(resp.success) {
+                this.getRestaurants(resp.recommendations);
+            }
+
+        } catch (err) {
+            console.error(err);
+        }
+    }
+
+    getRestaurants = async (list) => {
+        for(let i = 0; i < list.length; i++) {
+            try {
+                let resp = await fetch(`http://localhost:5000/api/restaurant?id=${list[i]}`, {
+                    method: 'GET',
+                    credentials: 'include'
+                })
+    
+                resp = await resp.json();
+    
+                if(resp.success) {
+                    this.rests.push(resp.info);
+                }
+            } catch (err) {
+                console.error(err);
+            }
+        }
+    }
+
     render() {
         if(!this.props.isLoggedIn) {
             return <Navigate to="/signin" />
