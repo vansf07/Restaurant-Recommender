@@ -55,6 +55,14 @@ def updateProfilePref(name, diet, cuisine, address):
 def getRestaurantFromDB(id):
     return db.restaurant.find_one({ '_id': id })
 
+def getAIRecommendation(username):
+    user = db.profiles.find_one({ "username": username })
+    visited = user['visited']
+    diet = user['diet']
+    cuisine = user['cuisine']
+    
+    return [1, 2, 3]
+
 @app.route('/api/signup', methods=['POST'])
 @cross_origin(supports_credentials=True)
 def signup():
@@ -155,6 +163,19 @@ def getRestInfo():
     return {
         'success': True,
         'info': info
+    }
+
+@app.route('/api/restaurant', methods=['GET'])
+@cross_origin(supports_credentials=True)
+def getRecommendation():
+    if 'name' in session and session['name']:
+        return {
+            'success': True,
+            'recommendations': getAIRecommendation(session['name'])
+        }
+    
+    return {
+        'success': False
     }
 
 @app.route('/', defaults={'path': ''})
