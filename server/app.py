@@ -52,6 +52,9 @@ def updateProfilePref(name, diet, cuisine, address):
     }
     db.profiles.update_one(fl, { '$set': upd })
 
+def getRestaurantFromDB(id):
+    return db.restaurant.find_one({ '_id': id })
+
 @app.route('/api/signup', methods=['POST'])
 @cross_origin(supports_credentials=True)
 def signup():
@@ -142,7 +145,17 @@ def updatePrefs():
         "success": False
     }
 
-
+@app.route('/api/restaurant', methods=['GET'])
+@cross_origin(supports_credentials=True)
+def getRestInfo():
+    rid = request.args.get('id')
+    
+    info = getRestaurantFromDB(rid)
+    
+    return {
+        'success': True,
+        'info': info
+    }
 
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
