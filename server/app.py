@@ -3,9 +3,10 @@ from flask import Flask, send_from_directory, request, session
 from flask_cors import CORS, cross_origin
 from pymongo import MongoClient
 
-DB_URL = "mongodb+srv://ranjana:HR0xrwSLVIrpEjSZ@clusterrrs.kmsjh.mongodb.net/test"
+# DB_URL = "mongodb+srv://ranjana:HR0xrwSLVIrpEjSZ@clusterrrs.kmsjh.mongodb.net/test"
+DB_URL = "mongodb://tejaswi:ehVg5Gz5mKhHEweA@cluster0-shard-00-00.l3sve.mongodb.net:27017,cluster0-shard-00-01.l3sve.mongodb.net:27017,cluster0-shard-00-02.l3sve.mongodb.net:27017/myFirstDatabase?ssl=true&replicaSet=atlas-4n7rhb-shard-0&authSource=admin&retryWrites=true&w=majority"
 
-dbClient = MongoClient(DB_URL)
+dbClient = MongoClient("localhost", 27017)
 db = dbClient.restrecom
 print("Mongo connected")
 
@@ -14,26 +15,70 @@ app.config["SESSION_TYPE"] = "mongodb"
 app.config["SESSION_MONGODB"] = dbClient
 app.secret_key = "thisissupposedtobeasecret"
 
-app.config["CORS_ORIGINS"] = "*"
-CORS(app)
+app.config["CORS_ORIGINS"] = "http://localhost"
+CORS(app, supports_credentials=True)
 
 # API Paths
 
 def is_valid_login(username, password):
-    # p = db.credentials.find_one({"username": username, "password": password})
-    p = (username == "a@b" and password == "asdf")
-    return p
+    print("Checking login for", username)
+    p = db.credentials.find_one({"username": username, "password": password})
+    # p = (username == "a@b" and password == "asdf")
+    # return p
     if p is None:
         return False
     return True
 
 def fetchProfileFromDB(username):
-    # db.profiles.find_one({ "username": username })
+    print("Fetching profile for", username)
+    print(db.profiles.find_one({ "username": username }))
     return {
         "name": "Rani Kumar",
         "age": "16",
         "foodPreference": "whatever"
     }
+
+def registerUser(name, tel, username, password):
+    db.profiles.insert_one({
+        '_id':  username,
+        'username': username,
+        'name': name,
+        'tel': tel
+    })
+    
+    db.credentials.insert_one({ '_id':  username, "username": username, "password": password })
+
+def updateProfilePref(name, diet, cuisine, address):
+    fl = { 'username': name }
+    upd = {
+        'diet': diet,
+        'cuisine': cuisine,
+        'address': address
+    }
+    db.profiles.update_one(fl, { '$set': upd })
+
+@app.route('/api/signup', methods=['POST'])
+@cross_origin(supports_credentials=True)
+def signup():
+    body = request.get_json()
+    name = body['name']
+    tel = body['tel']
+    username = body['username']
+    password = body['password']
+    
+    try:
+        registerUser(name, tel, username, password)
+        session['name'] = username
+        return {
+            'success': True,
+        }
+        
+    except:
+        return {
+            'success': False
+        }
+    
+
 
 @app.route('/api/login', methods=['POST'])
 @cross_origin(supports_credentials=True)
@@ -82,6 +127,26 @@ def getProfile():
     return {
         "success": False
     }
+
+@app.route('/api/prefs', methods=['PUT'])
+@cross_origin(supports_credentials=True)
+def updatePrefs():
+    if 'name' in session and session['name']:
+        body = request.get_json()
+        diet = str(body['diet'])
+        cuisine = str(body['cuisine'])
+        address = str(body['address'])
+        
+        updateProfilePref(session['name'], diet, cuisine, address)
+        
+        return {
+            "success": True,
+        }
+    
+    return {
+        "success": False
+    }
+
 
 
 @app.route('/', defaults={'path': ''})

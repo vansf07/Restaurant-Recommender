@@ -13,7 +13,6 @@ export default class Login extends Component {
     }
 
     handleSubmit = (event) => {
-        console.log(this.state);
         this.props.handleLogin(this.state.username, this.state.password);
         event.preventDefault();
     };

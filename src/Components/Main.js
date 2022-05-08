@@ -4,6 +4,7 @@ import App from './App';
 import Footer from './Footer';
 import Header from './Header';
 import Login from './Login';
+import Preferences from './Preferences';
 import Profile from './Profile';
 import Recommender from './Recommender';
 import Restaurant from './Restaurant';
@@ -14,6 +15,25 @@ class Main extends Component {
         isLoggedIn: false,
         username: null,
         profileInfo: null,
+        fetchingInfo: false,
+        settingPrefs: true,
+    }
+
+    handleSignup = async(name, tel, username, password) => {
+        let resp = await fetch(`http://localhost:5000/api/signup`, {
+            method: 'POST',
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({username, password, name, tel})
+        });
+
+        resp = await resp.json();
+
+        if(resp.success) {
+            this.setState({ isLoggedIn: true, username, profileInfo: null, fetchingInfo: false, settingPrefs: true });
+        }
     }
 
     handleLogin = async (username, password) => {
@@ -31,10 +51,10 @@ class Main extends Component {
             console.log(resp);
 
             if(resp.success) {
-                this.setState({ isLoggedIn: true, username: resp.username })
+                this.setState({ isLoggedIn: true, username: resp.username, fetchingInfo: true });
                 this.handleFetchProfile();
             } else {
-                this.setState({ isLoggedIn: false, username: null, profileInfo: null })
+                this.setState({ isLoggedIn: false, username: null, profileInfo: null });
             }
         } catch (err) {
             console.error(err);
@@ -71,7 +91,31 @@ class Main extends Component {
             console.log(resp);
 
             if(resp.success) {
-                this.setState({ profileInfo: resp.profile });
+                this.setState({ profileInfo: resp.profile, fetchingInfo: false });
+            }
+
+        } catch (err) {
+            console.error(err);
+        }
+    }
+
+    handleChangePrefs = async (diet, cuisine, address) => {
+        try {
+            let resp = await fetch(`http://localhost:5000/api/prefs`, {
+                method: 'PUT',
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({diet, cuisine, address})
+            })
+
+            resp = await resp.json();
+            console.log(resp);
+
+            if(resp.success) {
+                this.setState({ settingPrefs: false });
+                this.handleFetchProfile();
             }
 
         } catch (err) {
@@ -87,9 +131,10 @@ class Main extends Component {
                     <Route path="/" element={<App {...this.state} />} />
                     <Route path="/profile" element={<Profile {...this.state} />} />
                     <Route path="/signin" element={<Login {...this.state} handleLogin={this.handleLogin} />} />
-                    <Route path="/signup" element={<SignUp {...this.state} />} />
+                    <Route path="/signup" element={<SignUp {...this.state} handleSignup={this.handleSignup} />} />
                     <Route path="/restaurant/:id" element={<Restaurant {...this.state} />}/>
                     <Route path="/recommender" element={<Recommender {...this.state} />} />
+                    <Route path="/prefs" element={<Preferences {...this.state} handleChangePrefs={this.handleChangePrefs} />} />
             </Routes>
                 <Footer {...this.state} />
             </BrowserRouter>
