@@ -27,6 +27,26 @@ app.secret_key = "thisissupposedtobeasecret"
 app.config["CORS_ORIGINS"] = "http://localhost"
 CORS(app, supports_credentials=True)
 
+f= open('restaurant_dataset.json')
+restaurants = json.load(f)
+df = pd.DataFrame.from_dict(restaurants)
+# df["combined_text"] =  df["Cuisine"] + " " + df["Address"]
+df["combined_text"] =  df["Cuisine"]
+
+"""stopwords = stopwords.words('english')
+df['text_without_stopwords'] = df['combined_text'].apply(lambda x: ' '.join([word for word in x.split() if word not in (stopwords)]))
+cv = CountVectorizer()
+count_matrix = cv.fit_transform(df['text_without_stopwords'])"""
+
+tf = TfidfVectorizer(analyzer = "word", ngram_range=(1,2), min_df=0, stop_words='english')
+tfidf_matrix = tf.fit_transform(df['combined_text'])
+cosine =  cosine_similarity(tfidf_matrix, tfidf_matrix)
+
+def get_name_from_index(Index):
+    return df[df.restaurant_id == Index]["Name"].values[0]
+def get_index_from_name(Name):
+    return df[df.Name == Name]["restaurant_id"].values[0]
+
 # API Paths
 
 def is_valid_login(username, password):
@@ -86,24 +106,6 @@ def getAIRecommendation(username):
     print("AI", username, visited)
     # diet = user['diet']
     cuisine = user['cuisine']
-    f= open('restaurant_dataset.json')
-    restaurants = json.load(f)
-    df = pd.DataFrame.from_dict(restaurants)
-    df["combined_text"] =  df["Cuisine"] + " " + df["Address"]
-
-    """stopwords = stopwords.words('english')
-    df['text_without_stopwords'] = df['combined_text'].apply(lambda x: ' '.join([word for word in x.split() if word not in (stopwords)]))
-    cv = CountVectorizer()
-    count_matrix = cv.fit_transform(df['text_without_stopwords'])"""
-
-    tf = TfidfVectorizer(analyzer = "word", ngram_range=(1,2), min_df=0, stop_words='english')
-    tfidf_matrix = tf.fit_transform(df['combined_text'])
-    cosine =  cosine_similarity(tfidf_matrix, tfidf_matrix)
-
-    def get_name_from_index(Index):
-        return df[df.restaurant_id == Index]["Name"].values[0]
-    def get_index_from_name(Name):
-        return df[df.Name == Name]["restaurant_id"].values[0]
 
 
     def get_recommendations(rest):
@@ -121,6 +123,7 @@ def getAIRecommendation(username):
             i = i+1
             if i>2:
                 break
+        return
     
     temp_name = 5
     
@@ -130,7 +133,7 @@ def getAIRecommendation(username):
         for i in df['Cuisine']:
             if i.find(food)!=-1:
                 ind = j
-                temp_name = df['restaurant_id']
+                temp_name = df['restaurant_id'][j]
                 break
             j += 1
         get_recommendations(temp_name)

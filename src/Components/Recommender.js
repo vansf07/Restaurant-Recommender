@@ -40,6 +40,7 @@ class Recommender extends Component {
     }
 
     getRestaurants = async (list) => {
+        this.setState({rests: []})
         for(let i = 0; i < list.length; i++) {
             try {
                 let resp = await fetch(`http://localhost:5000/api/restaurant?id=${list[i]}`, {
@@ -73,7 +74,7 @@ class Recommender extends Component {
             console.log(resp);
 
             if(resp.success) {
-                this.setState({});
+                this.getRestaurants(resp.recommendations);
             }
         } catch (err) {
             console.error(err);
