@@ -12,7 +12,8 @@
     justify-content: center;
     position: relative;
     min-height: 100vh;
-    width:100%
+    width:100%;
+    padding: 50px;
 }
 .body {
     background-color: #6ac8af;

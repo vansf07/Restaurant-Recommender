@@ -83,6 +83,7 @@ def getAIRecommendation(username):
     user = db.profiles.find_one({ "username": username })
     restaurant_list = []
     visited = user['visited']
+    print("AI", username, visited)
     # diet = user['diet']
     cuisine = user['cuisine']
     f= open('restaurant_dataset.json')
@@ -105,33 +106,36 @@ def getAIRecommendation(username):
         return df[df.Name == Name]["restaurant_id"].values[0]
 
 
-    def get_recommendations(restaurant):
-        restaurant_index = restaurant
+    def get_recommendations(rest):
+        restaurant_index = rest
         similar_restaurants = list(enumerate(cosine[restaurant_index]))
         # sortedrestaurants = sorted(similar_restaurants, key = lambda x:x[1], reverse=True)[1:]
         sortedrestaurants = similar_restaurants
         i = 0
         for restaurant in sortedrestaurants:
+            if restaurant[0] in visited or restaurant[0] in restaurant_list:
+                continue
             restaurant_list.append(restaurant[0])
+            if len(restaurant_list) > 5:
+                break
             i = i+1
             if i>2:
                 break
     
-    temp_name = ""
-    json_object = getVisitedRest(username)
+    temp_name = 5
     
-    if not json_object['visited']:
-        food = json_object['cuisine']
+    if not visited:
+        food = cuisine
         j = 0
         for i in df['Cuisine']:
             if i.find(food)!=-1:
                 ind = j
-                temp_name = df.restaurant_id
+                temp_name = df['restaurant_id']
                 break
             j += 1
         get_recommendations(temp_name)
     else:
-        for rid in json_object['visited']:
+        for rid in visited:
             get_recommendations(rid)
 
     # def recommend(json_object):
