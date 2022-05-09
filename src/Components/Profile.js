@@ -37,7 +37,7 @@ class Profile extends Component {
 
         return (
             <div className={styles.main}>
-                <img className={styles.profilepic} src={profilepic} alt="profile"></img>
+               {/* <img className={styles.profilepic} src={profilepic} alt="profile"></img> */}
                 <div className={styles.container}><h1 className={styles.heading1}>{p.name}</h1></div>
                 <Card className={styles.card}>
                     <CardContent style={{backgroundColor: "#e4dfda"}}>
