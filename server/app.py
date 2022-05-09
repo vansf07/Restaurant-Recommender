@@ -65,14 +65,17 @@ def getRestaurantFromDB(id):
     return db.restaurant.find_one({ '_id': id })
 
 def getAIRecommendation(username):
+
     user = db.profiles.find_one({ "username": username })
+    
     visited = user['visited']
     # diet = user['diet']
     cuisine = user['cuisine']
+    f= open('restaurant_dataset.json')
+    restaurants = json.load(f)
     df = pd.DataFrame.from_dict(restaurants)
-    # df.head()
     df["combined_text"] =  df["Cuisine"] + " " + df["Address"]
-    
+
     """stopwords = stopwords.words('english')
     df['text_without_stopwords'] = df['combined_text'].apply(lambda x: ' '.join([word for word in x.split() if word not in (stopwords)]))
     cv = CountVectorizer()
@@ -97,6 +100,7 @@ def getAIRecommendation(username):
             i = i+1
             if i>2:
                 break
+
     def recommend(json_object):
         temp_name = ""
         print('Your recommendations are:')
