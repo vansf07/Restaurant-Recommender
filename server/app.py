@@ -70,6 +70,14 @@ def getVisitedRest(username):
     print(username, x)
     return x
 
+def setProfileVisit(username, id):
+    x = getVisitedRest(username)['visited']
+    x.append(id)
+    upd = {
+        'visited': x
+    }
+    db.profiles.update_one({"username": username}, { '$set': upd } )
+
 def getAIRecommendation(username):
 
     user = db.profiles.find_one({ "username": username })
@@ -274,6 +282,25 @@ def getRecommendation():
     return {
         'success': False
     }
+
+@app.route('/api/setVisit', methods=['GET'])
+@cross_origin(supports_credentials=True)
+def setVisited():
+    if 'name' in session and session['name']:
+        rid = int(request.args.get('id'))
+        setProfileVisit(session['name'], rid)
+        
+        return {
+            'success': True,
+            'recommendations': getAIRecommendation(session['name'])
+        }
+    
+    return {
+        'success': False
+    }
+
+
+
 
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')

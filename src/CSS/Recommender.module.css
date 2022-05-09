@@ -5,8 +5,9 @@
     background-color: #6ac8af;
     background-attachment: fixed; 
     background-size: cover;
-    display: grid;
-    grid-template-rows: 25% max-content;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
     align-items: center;
     justify-content: center;
     position: relative;
@@ -15,6 +16,7 @@
 }
 .body {
     background-color: #6ac8af;
+    height: fit-content;
 }
 .heading {
     font-family: 'Preahvihear', sans-serif;
@@ -62,4 +64,10 @@ span {
     font-family: 'Playfair Display', serif;
     text-align: left;
     font-size: 250%;
+}
+
+.cardsDiv {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }

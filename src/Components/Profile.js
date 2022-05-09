@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import styles from '../CSS/Profile.module.css';
-import profilepic from '../assets/jayant-dassz-u08NEYUYvig-unsplash.jpg';
 //import bgpic from '../assets/edgar-castrejon-1CsaVdwfIew-unsplash.jpg';
 //import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
@@ -37,7 +36,6 @@ class Profile extends Component {
 
         return (
             <div className={styles.main}>
-                <img className={styles.profilepic} src={profilepic} alt="profile"></img>
                 <div className={styles.container}><h1 className={styles.heading1}>{p.name}</h1></div>
                 <Card className={styles.card}>
                     <CardContent style={{backgroundColor: "#e4dfda"}}>

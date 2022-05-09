@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import styles from '../CSS/Recommender.module.css';
-import i1 from '../assets/res1_1.jfif';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
 import Button from '@mui/material/Button';
-import {ratingStars} from './Restaurant';
-import { Link, Navigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 /*
 <CardMedia
                         component="img"
@@ -16,9 +14,7 @@ import { Link, Navigate } from 'react-router-dom';
                     />
 */
 class Recommender extends Component {
-    state = {}
-
-    rests = [];
+    state = { rests: [] }
 
     async componentDidMount() {
         if(!this.props.isLoggedIn) {
@@ -52,15 +48,36 @@ class Recommender extends Component {
                 })
     
                 resp = await resp.json();
+                console.log(resp);
     
                 if(resp.success) {
-                    this.rests.push(resp.info);
+                    let x = this.state.rests;
+                    x.push(resp.info);
+                    this.setState({rests: x});
                 }
             } catch (err) {
                 console.error(err);
             }
         }
-        console.log(this.rests);
+        console.log(this.state.rests);
+    }
+
+    setVisited = async (id) => {
+        try {
+            let resp = await fetch(`http://localhost:5000/api/setVisit?id=${id}`, {
+                method: 'GET',
+                credentials: 'include'
+            })
+
+            resp = await resp.json();
+            console.log(resp);
+
+            if(resp.success) {
+                this.setState({});
+            }
+        } catch (err) {
+            console.error(err);
+        }
     }
 
     render() {
@@ -68,21 +85,30 @@ class Recommender extends Component {
             return <Navigate to="/signin" />
         }
 
+        let cards = [];
+        console.log("Here", this.state.rests);
+
+        for(let r of this.state.rests) {
+            cards.push((
+                <Card className={styles.cardR} style={{ backgroundColor: "#e4dfda" }}>
+                    <CardContent style={{ backgroundColor: "#e4dfda" }}>
+                        <span className={styles.headingR}>{r.Name}</span>  <br />
+                        <span>Cuisine: </span> {r.Cuisine} <br /> <br />
+                        <span>Address: </span><span>{r.Address}</span> <br />
+                    </CardContent>
+                    <CardActions style={{ backgroundColor: "#e4dfda" }}>
+                        <Button size="small" onClick={ () => this.setVisited(r.restaurant_id) }>Visited</Button>
+                    </CardActions>
+                </Card>
+            ));
+        }
+
         return (
             <div className={styles.body}>
             <div className={styles.main}>
                 <h1 className={styles.heading}>Hello Rani Kumar, are you ready to explore?</h1>
-                <div><Card className={styles.cardR} style={{ backgroundColor: "#e4dfda" }}>
-                    <CardContent style={{ backgroundColor: "#e4dfda" }}>
-                        <img src={i1} alt="rest" className={styles.restaurantpic}></img>
-                        <span className={styles.headingR}>Shanti Sagar</span>  <br />
-                        <span>Tags: </span> South Indian, Chinese, Pure Vegetarian <br /> <br />
-                        <span>Ratings: </span><span>{ ratingStars(4) }</span> <br />
-                    </CardContent>
-                    <CardActions style={{ backgroundColor: "#e4dfda" }}>
-                        <Link to="/restaurant/1"><Button size="small">Learn More</Button></Link>
-                    </CardActions>
-                </Card> 
+                <div className={styles.cardsDiv}>
+                    {cards}
                 </div>               
             </div>
             </div>
