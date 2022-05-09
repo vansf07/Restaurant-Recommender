@@ -106,7 +106,7 @@ class Recommender extends Component {
         return (
             <div className={styles.body}>
             <div className={styles.main}>
-                <h1 className={styles.heading}>Hello Rani Kumar, are you ready to explore?</h1>
+                <h1 className={styles.heading}>Hello {this.props.profileInfo.name}, are you ready to explore?</h1>
                 <div className={styles.cardsDiv}>
                     {cards}
                 </div>               

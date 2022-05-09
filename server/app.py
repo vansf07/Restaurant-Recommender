@@ -109,8 +109,8 @@ def getAIRecommendation(username):
     def get_recommendations(rest):
         restaurant_index = rest
         similar_restaurants = list(enumerate(cosine[restaurant_index]))
-        # sortedrestaurants = sorted(similar_restaurants, key = lambda x:x[1], reverse=True)[1:]
-        sortedrestaurants = similar_restaurants
+        sortedrestaurants = sorted(similar_restaurants, key = lambda x:x[1], reverse=True)[1:]
+        # sortedrestaurants = similar_restaurants
         i = 0
         for restaurant in sortedrestaurants:
             if restaurant[0] in visited or restaurant[0] in restaurant_list:
