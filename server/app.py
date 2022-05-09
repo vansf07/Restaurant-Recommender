@@ -67,7 +67,7 @@ def getRestaurantFromDB(id):
 def getAIRecommendation(username):
 
     user = db.profiles.find_one({ "username": username })
-    
+    restaurant_list = []
     visited = user['visited']
     # diet = user['diet']
     cuisine = user['cuisine']
@@ -96,7 +96,7 @@ def getAIRecommendation(username):
         sortedrestaurants = sorted(similar_restaurants, key = lambda x:x[1], reverse=True)[1:]
         i = 0
         for restaurant in sortedrestaurants:
-            print(get_name_from_index(restaurant[0]))
+            restaurant_list.append(get_name_from_index(restaurant[0]))
             i = i+1
             if i>2:
                 break
@@ -111,7 +111,7 @@ def getAIRecommendation(username):
                 if i.find(food)!=-1:
                     ind = j
                     temp_name = get_name_from_index(df.restaurant_id)
-                break
+                    break
                 j += 1
             get_recommendations(temp_name)
         else:
@@ -134,7 +134,7 @@ def getAIRecommendation(username):
         with open("user.json", "w") as outfile:
             outfile.write(json_object)
 
-    return [1, 2, 3]
+    return restaurant_list
 
 @app.route('/api/signup', methods=['POST'])
 @cross_origin(supports_credentials=True)
