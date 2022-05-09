@@ -99,7 +99,7 @@ class Main extends Component {
         }
     }
 
-    handleChangePrefs = async (diet, cuisine, address) => {
+    handleChangePrefs = async (cuisine, address) => {
         try {
             let resp = await fetch(`http://localhost:5000/api/prefs`, {
                 method: 'PUT',
@@ -107,7 +107,7 @@ class Main extends Component {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({diet, cuisine, address})
+                body: JSON.stringify({cuisine, address})
             })
 
             resp = await resp.json();

@@ -5,8 +5,7 @@ import '../CSS/login.signup.css'
 
 class Preferences extends Component {
     state = {
-        diet: "veg",
-        cuisine: "sind"
+        cuisine: "American"
     };
 
     handleChange = (target, value) => {
@@ -16,7 +15,7 @@ class Preferences extends Component {
     }
 
     handleSubmit = (event) => {
-        this.props.handleChangePrefs(this.state.diet, this.state.cuisine, this.state.address);
+        this.props.handleChangePrefs(this.state.cuisine, this.state.address);
         // console.log(this.state);
         event.preventDefault();
     }
@@ -36,23 +35,11 @@ class Preferences extends Component {
                         <div className="form-group">
                             <label>Cuisine Preference</label>
                             <select className="form-select" value={this.state.cuisine} onChange={(e) => this.handleChange('cuisine', e.target.value)}>
-                                <option value="sind">South Indian</option>
-                                <option value="nind">North Indian</option>
-                                <option value="chn">Chinese</option>
-                                <option value="arb">Arabic</option>
-                                <option value="eng">English</option>
-                                <option value="fch">French</option>
-                            </select>
-                        </div>
-
-                        <div className="form-group">
-                            <label>Dietary Preference</label>
-                            <select className="form-select" value={this.state.diet} onChange={(e) => this.handleChange('diet', e.target.value)}>
-                                <option value="veg">Vegetarian</option>
-                                <option value="nonveg">Non-Vegetarian</option>
-                                <option value="vegan">Vegan</option>
-                                <option value="noegg">No Egg</option>
-                                <option value="allergy">Allergies</option>
+                                <option value="Indian">Indian</option>
+                                <option value="Chinese">Chinese</option>
+                                <option value="Arabic">Arabic</option>
+                                <option value="American">American</option>
+                                <option value="French">French</option>
                             </select>
                         </div>
 

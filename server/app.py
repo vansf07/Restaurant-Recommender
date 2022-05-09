@@ -11,11 +11,12 @@ from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 from nltk.corpus import stopwords
 
-# DB_URL = "mongodb+srv://ranjana:HR0xrwSLVIrpEjSZ@clusterrrs.kmsjh.mongodb.net/test"
-DB_URL = "mongodb://tejaswi:ehVg5Gz5mKhHEweA@cluster0-shard-00-00.l3sve.mongodb.net:27017,cluster0-shard-00-01.l3sve.mongodb.net:27017,cluster0-shard-00-02.l3sve.mongodb.net:27017/myFirstDatabase?ssl=true&replicaSet=atlas-4n7rhb-shard-0&authSource=admin&retryWrites=true&w=majority"
+# DB_URL = "mongodb+srv://ranjana:HR0xrwSLVIrpEjSZ@clusterrrs.kmsjh.mongodb.net"
+# DB_URL = "mongodb://tejaswi:ehVg5Gz5mKhHEweA@cluster0-shard-00-00.l3sve.mongodb.net:27017,cluster0-shard-00-01.l3sve.mongodb.net:27017,cluster0-shard-00-02.l3sve.mongodb.net:27017/myFirstDatabase?ssl=true&replicaSet=atlas-4n7rhb-shard-0&authSource=admin&retryWrites=true&w=majority"
+DB_URL = "mongodb+srv://ranjana:HR0xrwSLVIrpEjSZ@clusterrrs.kmsjh.mongodb.net/sample_restaurants?retryWrites=true&w=majority"
 
-dbClient = MongoClient("localhost", 27017)
-db = dbClient.restrecom
+dbClient = MongoClient(DB_URL)
+db = dbClient.sample_restaurants
 print("Mongo connected")
 
 app = Flask(__name__, static_folder='../build/')
@@ -52,7 +53,7 @@ def registerUser(name, tel, username, password):
     
     db.credentials.insert_one({ '_id':  username, "username": username, "password": password })
 
-def updateProfilePref(name, diet, cuisine, address):
+def updateProfilePref(name, cuisine, address):
     fl = { 'username': name }
     upd = {
         # 'diet': diet,
@@ -62,7 +63,12 @@ def updateProfilePref(name, diet, cuisine, address):
     db.profiles.update_one(fl, { '$set': upd })
 
 def getRestaurantFromDB(id):
-    return db.restaurant.find_one({ '_id': id })
+    return db.restaurants.find_one({ "restaurant_id": id }, {"_id": 0})
+
+def getVisitedRest(username):
+    x = db.profiles.find_one({ "username": username })
+    print(username, x)
+    return x
 
 def getAIRecommendation(username):
 
@@ -90,49 +96,68 @@ def getAIRecommendation(username):
     def get_index_from_name(Name):
         return df[df.Name == Name]["restaurant_id"].values[0]
 
+
     def get_recommendations(restaurant):
-        restaurant_index = get_index_from_name(restaurant)
+        restaurant_index = restaurant
         similar_restaurants = list(enumerate(cosine[restaurant_index]))
-        sortedrestaurants = sorted(similar_restaurants, key = lambda x:x[1], reverse=True)[1:]
+        # sortedrestaurants = sorted(similar_restaurants, key = lambda x:x[1], reverse=True)[1:]
+        sortedrestaurants = similar_restaurants
         i = 0
         for restaurant in sortedrestaurants:
-            restaurant_list.append(get_name_from_index(restaurant[0]))
+            restaurant_list.append(restaurant[0])
             i = i+1
             if i>2:
                 break
+    
+    temp_name = ""
+    json_object = getVisitedRest(username)
+    
+    if not json_object['visited']:
+        food = json_object['cuisine']
+        j = 0
+        for i in df['Cuisine']:
+            if i.find(food)!=-1:
+                ind = j
+                temp_name = df.restaurant_id
+                break
+            j += 1
+        get_recommendations(temp_name)
+    else:
+        for rid in json_object['visited']:
+            get_recommendations(rid)
 
-    def recommend(json_object):
-        temp_name = ""
-        print('Your recommendations are:')
-        if not json_object['restaurants_visited']:
-            food = json_object['cuisine']
-            j = 0
-            for i in df['Cuisine']:
-                if i.find(food)!=-1:
-                    ind = j
-                    temp_name = get_name_from_index(df.restaurant_id)
-                    break
-                j += 1
-            get_recommendations(temp_name)
-        else:
-            for title in json_object['restaurants_visited']:
-                get_recommendations(title)
-        print('Which of these restaurants are you choosing today? Enter the name: ')
-        chosen = input()
-        return chosen
+    # def recommend(json_object):
+    #     temp_name = ""
+    #     print('Your recommendations are:')
+    #     if not json_object['restaurants_visited']:
+    #         food = json_object['cuisine']
+    #         j = 0
+    #         for i in df['Cuisine']:
+    #             if i.find(food)!=-1:
+    #                 ind = j
+    #                 temp_name = get_name_from_index(df.restaurant_id)
+    #                 break
+    #             j += 1
+    #         get_recommendations(temp_name)
+    #     else:
+    #         for title in json_object['restaurants_visited']:
+    #             get_recommendations(title)
+    #     print('Which of these restaurants are you choosing today? Enter the name: ')
+    #     chosen = input()
+    #     return chosen
 
-    temp = {'name': name , 'password': password, 'cuisine': food, 'address': address, 'restaurants_visited': []}
-    json_object = json.dumps(temp, indent = 4)
-    with open("user.json", "w") as outfile:
-            outfile.write(json_object)
-    with open('user.json', 'r') as openfile:
-        json_object = json.load(openfile)
-        print(json_object)
-        a = recommend(json_object)
-        temp = temp['restaurants_visited'].append(a)
-        json_object = json.dumps(temp, indent = 4)
-        with open("user.json", "w") as outfile:
-            outfile.write(json_object)
+    # temp = {'name': name , 'password': password, 'cuisine': food, 'address': address, 'restaurants_visited': []}
+    # json_object = json.dumps(temp, indent = 4)
+    # with open("user.json", "w") as outfile:
+    #         outfile.write(json_object)
+    # with open('user.json', 'r') as openfile:
+    #     json_object = json.load(openfile)
+    #     print(json_object)
+    #     a = recommend(json_object)
+    #     temp = temp['restaurants_visited'].append(a)
+    #     json_object = json.dumps(temp, indent = 4)
+    #     with open("user.json", "w") as outfile:
+    #         outfile.write(json_object)
 
     return restaurant_list
 
@@ -229,10 +254,9 @@ def updatePrefs():
 @app.route('/api/restaurant', methods=['GET'])
 @cross_origin(supports_credentials=True)
 def getRestInfo():
-    rid = request.args.get('id')
-    
+    rid = int(request.args.get('id'))
     info = getRestaurantFromDB(rid)
-    
+        
     return {
         'success': True,
         'info': info
