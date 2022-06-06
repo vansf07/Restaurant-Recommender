@@ -11,9 +11,7 @@ from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 from nltk.corpus import stopwords
 
-# DB_URL = "mongodb+srv://ranjana:HR0xrwSLVIrpEjSZ@clusterrrs.kmsjh.mongodb.net"
-# DB_URL = "mongodb://tejaswi:ehVg5Gz5mKhHEweA@cluster0-shard-00-00.l3sve.mongodb.net:27017,cluster0-shard-00-01.l3sve.mongodb.net:27017,cluster0-shard-00-02.l3sve.mongodb.net:27017/myFirstDatabase?ssl=true&replicaSet=atlas-4n7rhb-shard-0&authSource=admin&retryWrites=true&w=majority"
-DB_URL = "mongodb+srv://ranjana:HR0xrwSLVIrpEjSZ@clusterrrs.kmsjh.mongodb.net/sample_restaurants?retryWrites=true&w=majority"
+DB_URL = os.environ["DB_URL"]
 
 dbClient = MongoClient(DB_URL)
 db = dbClient.sample_restaurants
