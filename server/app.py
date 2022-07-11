@@ -74,7 +74,7 @@ def registerUser(name, tel, username, password):
 def updateProfilePref(name, cuisine, address):
     fl = { 'username': name }
     upd = {
-        # 'diet': diet,
+        'diet': diet,
         'cuisine': cuisine,
         'address': address
     }
@@ -102,7 +102,7 @@ def getAIRecommendation(username):
     restaurant_list = []
     visited = user['visited']
     print("AI", username, visited)
-    # diet = user['diet']
+    diet = user['diet']
     cuisine = user['cuisine']
 
 
@@ -250,7 +250,7 @@ def getProfile():
 def updatePrefs():
     if 'name' in session and session['name']:
         body = request.get_json()
-        # diet = str(body['diet'])
+        diet = str(body['diet'])
         cuisine = str(body['cuisine'])
         address = str(body['address'])
         
